@@ -1,0 +1,13 @@
+:root {
+    --background-color: #F0F0F0;
+}
+
+body {
+    margin: 0;
+    background-color: var(--background-color);
+}
+
+.loading {
+    position: sticky;
+    top: 0;
+}
