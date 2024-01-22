@@ -34,7 +34,9 @@ function RegisterInput({ onRegister }) {
         />
       </FormControl>
       <FormControl>
-        <FormLabel htmlFor="email">Email</FormLabel>
+        <FormLabel htmlFor="email" mt="4">
+          Email
+        </FormLabel>
         <Input
           id="email"
           type="email"

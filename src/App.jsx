@@ -8,6 +8,7 @@ import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import LeaderboardsPage from './pages/LeaderboardsPage';
+import Loading from './components/Loading';
 
 function App() {
   const dispatch = useDispatch();
@@ -28,7 +29,8 @@ function App() {
 
   if (authUser === null) {
     return (
-      <header>
+      <>
+        <Loading />
         <Navbar authUser={authUser} />
         <main>
           <Routes>
@@ -38,11 +40,12 @@ function App() {
             <Route path="/leaderboards" element={<LeaderboardsPage />} />
           </Routes>
         </main>
-      </header>
+      </>
     );
   }
   return (
-    <header>
+    <>
+      <Loading />
       <Navbar authUser={authUser} onLogOut={onLogOut} />
       <main>
         <Routes>
@@ -52,7 +55,7 @@ function App() {
           <Route path="/leaderboards" element={<LeaderboardsPage />} />
         </Routes>
       </main>
-    </header>
+    </>
   );
 }
 

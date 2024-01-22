@@ -3,7 +3,11 @@ import {
 } from '@chakra-ui/react';
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { IoBarChartOutline } from 'react-icons/io5';
+import {
+  IoBarChartOutline,
+  IoLogInOutline,
+  IoLogOutOutline,
+} from 'react-icons/io5';
 import PropTypes from 'prop-types';
 
 function Navbar({ authUser, onLogOut }) {
@@ -12,7 +16,7 @@ function Navbar({ authUser, onLogOut }) {
     navigate('/login');
   };
   return (
-    <Box>
+    <header>
       <Flex
         w="full"
         zIndex={10}
@@ -44,28 +48,33 @@ function Navbar({ authUser, onLogOut }) {
             </Button>
           </Link>
         </Box>
-        <Box display="flex" gap={2}>
-          {authUser && (
-            <Box display="flex" gap={2} alignItems="center">
-              <Avatar name={authUser?.name} src={authUser?.avatar} size="sm" />
-              <Text>
-                Hi,
-                {authUser?.name}
-              </Text>
-            </Box>
-          )}
+        {authUser ? (
+          <Box display="flex" alignItems="center" gap={2}>
+            <Avatar name={authUser?.name} src={authUser?.avatar} size="sm" />
+            <Text>
+              Hi,
+              {' '}
+              {authUser?.name}
+            </Text>
+            <Button onClick={onLogOut} variant="ghost" colorScheme="red">
+              <Icon as={IoLogOutOutline} mr={2} />
+              Logout
+            </Button>
+          </Box>
+        ) : (
           <Button
-            onClick={authUser ? onLogOut : onLogIn}
-            variant="ghost"
-            color="dark"
-            _hover={{ bg: 'gray.100' }}
-            _active={{ bg: 'gray.300' }}
+            onClick={onLogIn}
+            color="white"
+            bg="brand.main"
+            _hover={{ bg: 'brand.hover' }}
+            _active={{ bg: 'brand.active' }}
           >
-            {authUser ? 'Logout' : 'Login'}
+            <Icon as={IoLogInOutline} mr={2} />
+            Login
           </Button>
-        </Box>
+        )}
       </Flex>
-    </Box>
+    </header>
   );
 }
 
