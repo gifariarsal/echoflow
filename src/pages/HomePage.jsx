@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { Box, IconButton } from '@chakra-ui/react';
+import { Box, Heading, IconButton, Text } from '@chakra-ui/react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { IoAddOutline } from 'react-icons/io5';
@@ -10,6 +10,8 @@ import {
   asyncToggleDownVoteThread,
 } from '../redux/threads/action';
 import useInput from '../hooks/useInput';
+import ThreadCategoryList from '../components/ThreadCategoryList';
+// import ThreadList from '../components/ThreadList';
 
 function HomePage({ authUser }) {
   const dispatch = useDispatch();
@@ -23,11 +25,11 @@ function HomePage({ authUser }) {
     dispatch(asyncPopulateUsersAndThreads());
   }, [dispatch]);
 
-  const onUpVote = (id) => {
+  const onUpVoteThread = (id) => {
     dispatch(asyncToggleUpVoteThread(id));
   };
 
-  const onDownVote = (id) => {
+  const onDownVoteThread = (id) => {
     dispatch(asyncToggleDownVoteThread(id));
   };
 
@@ -54,7 +56,15 @@ function HomePage({ authUser }) {
         minH="100vh"
         rounded="xl"
       >
-        test
+        <header>
+          <Text fontWeight="medium" mb={1}>
+            Category
+          </Text>
+          <ThreadCategoryList onCategoryChange={onCategoryChange} />
+        </header>
+        <Heading as="h2" size="lg" mb={4}>
+          Explore Threads
+        </Heading>
       </Box>
       {authUser && (
         <IconButton

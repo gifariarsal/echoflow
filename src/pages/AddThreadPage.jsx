@@ -24,7 +24,7 @@ function AddThreadPage() {
         minH="100vh"
         rounded="xl"
       >
-        <Heading as="h3" size="lg" mb={4}>
+        <Heading as="h2" size="lg" mb={4}>
           Add New Thread
         </Heading>
         <AddThreadInput addThread={onAddThread} />
