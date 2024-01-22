@@ -7,6 +7,7 @@ import {
   IoBarChartOutline,
   IoLogInOutline,
   IoLogOutOutline,
+  IoHomeOutline,
 } from 'react-icons/io5';
 import PropTypes from 'prop-types';
 
@@ -31,15 +32,20 @@ function Navbar({ authUser, onLogOut }) {
         cursor="pointer"
         px={{ base: 4, md: 8 }}
       >
-        <Box display="flex" alignItems="center">
+        <Box display="flex" alignItems="center" gap={2}>
           <Link to="/">
             <Image
-              mr={6}
               src="/echoflow_logo.png"
               alt="logo"
               h="28px"
               _hover={{ filter: 'brightness(70%)', transition: '300ms' }}
             />
+          </Link>
+          <Link to="/">
+            <Button variant="ghost" color="dark" _hover={{ bg: 'gray.100' }}>
+              <Icon as={IoHomeOutline} mr={2} />
+              Home
+            </Button>
           </Link>
           <Link to="/leaderboards">
             <Button variant="ghost" color="dark" _hover={{ bg: 'gray.100' }}>

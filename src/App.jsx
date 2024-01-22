@@ -31,7 +31,7 @@ function App() {
     return (
       <>
         <Loading />
-        <Navbar authUser={authUser} />
+        <Navbar />
         <main>
           <Routes>
             <Route path="/" element={<HomePage />} />

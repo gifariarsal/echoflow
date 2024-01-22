@@ -5,7 +5,6 @@ import {
   FormLabel,
   Input,
   Button,
-  Flex,
   InputRightElement,
   InputGroup,
 } from '@chakra-ui/react';
@@ -34,9 +33,7 @@ function LoginInput({ onLogin }) {
       </FormControl>
       <FormControl>
         <FormLabel htmlFor="password" mt="4">
-          <Flex alignItems="baseline" justifyContent="space-between">
-            Password
-          </Flex>
+          Password
         </FormLabel>
         <InputGroup>
           <Input
