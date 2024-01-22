@@ -1,5 +1,5 @@
 import {
-  Box, Button, Flex, Icon, Image,
+  Avatar, Box, Button, Flex, Icon, Image, Text
 } from '@chakra-ui/react';
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
@@ -44,15 +44,26 @@ function Navbar({ authUser, onLogOut }) {
             </Button>
           </Link>
         </Box>
-        <Button
-          onClick={authUser ? onLogOut : onLogIn}
-          variant="ghost"
-          color="dark"
-          _hover={{ bg: 'gray.100' }}
-          _active={{ bg: 'gray.300' }}
-        >
-          {authUser ? 'Logout' : 'Login'}
-        </Button>
+        <Box display="flex" gap={2}>
+          {authUser && (
+            <Box display="flex" gap={2} alignItems="center">
+              <Avatar name={authUser?.name} src={authUser?.avatar} size="sm" />
+              <Text>
+                Hi,
+                {authUser?.name}
+              </Text>
+            </Box>
+          )}
+          <Button
+            onClick={authUser ? onLogOut : onLogIn}
+            variant="ghost"
+            color="dark"
+            _hover={{ bg: 'gray.100' }}
+            _active={{ bg: 'gray.300' }}
+          >
+            {authUser ? 'Logout' : 'Login'}
+          </Button>
+        </Box>
       </Flex>
     </Box>
   );
@@ -65,8 +76,13 @@ const authUserShape = {
 };
 
 Navbar.propTypes = {
-  authUser: PropTypes.shape(authUserShape).isRequired,
-  onLogOut: PropTypes.func.isRequired,
+  authUser: PropTypes.shape(authUserShape),
+  onLogOut: PropTypes.func,
+};
+
+Navbar.defaultProps = {
+  authUser: null,
+  onLogOut: () => {},
 };
 
 export default Navbar;

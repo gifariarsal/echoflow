@@ -29,7 +29,7 @@ function App() {
   if (authUser === null) {
     return (
       <header>
-        <Navbar authUser={authUser} onLogOut={onLogOut} />
+        <Navbar authUser={authUser} />
         <main>
           <Routes>
             <Route path="/" element={<HomePage />} />
@@ -39,10 +39,20 @@ function App() {
           </Routes>
         </main>
       </header>
-    )
+    );
   }
   return (
-    <Navbar />
+    <header>
+      <Navbar authUser={authUser} onLogOut={onLogOut} />
+      <main>
+        <Routes>
+          <Route path="/" element={<HomePage authUser={authUser} />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
+          <Route path="/leaderboards" element={<LeaderboardsPage />} />
+        </Routes>
+      </main>
+    </header>
   );
 }
 
