@@ -11,6 +11,7 @@ import {
   InputGroup,
 } from '@chakra-ui/react';
 import useInput from '../hooks/useInput';
+import CTAButton from './CTAButton';
 
 function RegisterInput({ onRegister }) {
   const [name, onNameChange] = useInput('');
@@ -71,21 +72,7 @@ function RegisterInput({ onRegister }) {
           </InputRightElement>
         </InputGroup>
       </FormControl>
-      <Button
-        type="button"
-        display="flex"
-        justifyContent="center"
-        w="100%"
-        mt="6"
-        rounded="lg"
-        color="white"
-        bgColor="brand.main"
-        _hover={{ bgColor: 'brand.hover' }}
-        _active={{ bgColor: 'brand.active' }}
-        onClick={() => onRegister({ name, email, password })}
-      >
-        Log In
-      </Button>
+      <CTAButton action="Register" onClick={() => onRegister({ name, email, password })} />
     </form>
   );
 }

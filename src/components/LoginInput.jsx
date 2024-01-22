@@ -10,6 +10,7 @@ import {
 } from '@chakra-ui/react';
 import { IoEyeOffOutline, IoEyeOutline } from 'react-icons/io5';
 import useInput from '../hooks/useInput';
+import CTAButton from './CTAButton';
 
 function LoginInput({ onLogin }) {
   const [email, onEmailChange] = useInput('');
@@ -55,21 +56,7 @@ function LoginInput({ onLogin }) {
           </InputRightElement>
         </InputGroup>
       </FormControl>
-      <Button
-        type="button"
-        display="flex"
-        justifyContent="center"
-        w="100%"
-        mt="6"
-        rounded="lg"
-        color="white"
-        bgColor="brand.main"
-        _hover={{ bgColor: 'brand.hover' }}
-        _active={{ bgColor: 'brand.active' }}
-        onClick={() => onLogin({ email, password })}
-      >
-        Log In
-      </Button>
+      <CTAButton action="Login" onClick={() => onLogin({ email, password })} />
     </form>
   );
 }
