@@ -24,7 +24,7 @@ function AddThreadInput({ addThread }) {
 
   return (
     <form>
-      <FormControl>
+      <FormControl isRequired>
         <FormLabel htmlFor="title">Title</FormLabel>
         <Input
           id="title"
@@ -34,7 +34,7 @@ function AddThreadInput({ addThread }) {
           onChange={onTitleChange}
         />
       </FormControl>
-      <FormControl mt="4">
+      <FormControl isRequired mt="4">
         <FormLabel htmlFor="category">Category</FormLabel>
         <Input
           id="category"
@@ -44,7 +44,7 @@ function AddThreadInput({ addThread }) {
           onChange={onCategoryChange}
         />
       </FormControl>
-      <FormControl mt="4" mb="2">
+      <FormControl isRequired mt="4" mb="2">
         <FormLabel htmlFor="body">Content</FormLabel>
         <Textarea
           id="body"

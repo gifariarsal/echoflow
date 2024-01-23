@@ -22,7 +22,7 @@ function LoginInput({ onLogin }) {
 
   return (
     <form>
-      <FormControl>
+      <FormControl isRequired>
         <FormLabel htmlFor="email">Email</FormLabel>
         <Input
           id="email"
@@ -32,8 +32,8 @@ function LoginInput({ onLogin }) {
           onChange={onEmailChange}
         />
       </FormControl>
-      <FormControl>
-        <FormLabel htmlFor="password" mt="4">
+      <FormControl isRequired mt="4">
+        <FormLabel htmlFor="password">
           Password
         </FormLabel>
         <InputGroup>

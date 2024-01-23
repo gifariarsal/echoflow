@@ -17,7 +17,7 @@ function LeaderboardList({ leaderboards }) {
         </Box>
       </header>
       {leaderboards.map((leaderboard) => (
-        <LeaderboardItem key={leaderboard.id} {...leaderboard} />
+        <LeaderboardItem key={leaderboard.user.id} {...leaderboard} />
       ))}
     </Box>
   );

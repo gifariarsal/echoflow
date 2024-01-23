@@ -6,7 +6,6 @@ import {
   FormLabel,
   Input,
   Button,
-  Flex,
   InputRightElement,
   InputGroup,
 } from '@chakra-ui/react';
@@ -24,7 +23,7 @@ function RegisterInput({ onRegister }) {
 
   return (
     <form>
-      <FormControl>
+      <FormControl isRequired>
         <FormLabel htmlFor="name">Name</FormLabel>
         <Input
           id="name"
@@ -34,10 +33,8 @@ function RegisterInput({ onRegister }) {
           onChange={onNameChange}
         />
       </FormControl>
-      <FormControl>
-        <FormLabel htmlFor="email" mt="4">
-          Email
-        </FormLabel>
+      <FormControl isRequired mt="4">
+        <FormLabel htmlFor="email">Email</FormLabel>
         <Input
           id="email"
           type="email"
@@ -46,12 +43,8 @@ function RegisterInput({ onRegister }) {
           onChange={onEmailChange}
         />
       </FormControl>
-      <FormControl>
-        <FormLabel htmlFor="password" mt="4">
-          <Flex alignItems="baseline" justifyContent="space-between">
-            Password
-          </Flex>
-        </FormLabel>
+      <FormControl isRequired mt="4">
+        <FormLabel htmlFor="password">Password</FormLabel>
         <InputGroup>
           <Input
             id="password"
@@ -72,7 +65,10 @@ function RegisterInput({ onRegister }) {
           </InputRightElement>
         </InputGroup>
       </FormControl>
-      <CTAButton action="Register" onClick={() => onRegister({ name, email, password })} />
+      <CTAButton
+        action="Register"
+        onClick={() => onRegister({ name, email, password })}
+      />
     </form>
   );
 }

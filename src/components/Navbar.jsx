@@ -38,18 +38,12 @@ function Navbar({ authUser, onLogOut }) {
             />
           </Link>
           <Link to="/">
-            <Button
-              variant="ghost"
-              leftIcon={<IoHomeOutline />}
-            >
+            <Button variant="ghost" leftIcon={<IoHomeOutline />}>
               Home
             </Button>
           </Link>
           <Link to="/leaderboards">
-            <Button
-              variant="ghost"
-              leftIcon={<IoBarChartOutline />}
-            >
+            <Button variant="ghost" leftIcon={<IoBarChartOutline />}>
               Leaderboards
             </Button>
           </Link>
@@ -59,6 +53,7 @@ function Navbar({ authUser, onLogOut }) {
             <Avatar name={authUser?.name} src={authUser?.avatar} size="sm" />
             <Text>
               Hi,
+              {' '}
               {authUser?.name}
             </Text>
             <Button

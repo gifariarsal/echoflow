@@ -24,9 +24,9 @@ function ThreadCategoryList({ onCategoryChange }) {
 
   return (
     <>
-      {uniqueCategory.map((category, index) => (
+      {uniqueCategory.map((category) => (
         <ThreadCategoryItem
-          key={index}
+          key={category}
           category={category}
           selected={selected}
           selectCategory={selectCategory}

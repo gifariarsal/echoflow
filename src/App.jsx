@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import React, { useEffect } from 'react';
 import { asyncPreloadProcess } from './redux/isPreload/action';
@@ -15,6 +15,7 @@ import Navbar from './components/Navbar';
 import Loading from './components/Loading';
 
 function App() {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const authUser = useSelector((state) => state.authUser);
   const isPreload = useSelector((state) => state.isPreload);
@@ -23,8 +24,9 @@ function App() {
     dispatch(asyncPreloadProcess());
   }, [dispatch]);
 
-  const onLogOut = () => {
-    dispatch(asyncUnsetAuthUser());
+  const onLogOut = async () => {
+    await dispatch(asyncUnsetAuthUser());
+    navigate('/');
   };
 
   if (isPreload) {

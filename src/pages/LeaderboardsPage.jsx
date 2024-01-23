@@ -5,17 +5,13 @@ import { asyncPopulateLeaderboards } from '../redux/shared/action';
 import LeaderboardList from '../components/LeaderboardList';
 
 function LeaderboardsPage() {
-  const { leaderboards = [] } = useSelector((states) => states);
+  const leaderboards = useSelector((states) => states.leaderboards);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(asyncPopulateLeaderboards());
   }, [dispatch]);
-
-  const leaderboardList = leaderboards.map((leaderboard) => ({
-    ...leaderboard,
-  }));
 
   return (
     <Box w="full" minH="100vh" bg="bg.primary" p={4}>
@@ -30,7 +26,7 @@ function LeaderboardsPage() {
         <Heading as="h2" size="lg" mb={8}>
           Most Active Users
         </Heading>
-        <LeaderboardList leaderboards={leaderboardList} />
+        <LeaderboardList leaderboards={leaderboards} />
       </Box>
     </Box>
   );
