@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { Box, Heading, IconButton, Text } from '@chakra-ui/react';
+import {
+  Box, Heading, IconButton, Text
+} from '@chakra-ui/react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { IoAddOutline } from 'react-icons/io5';
@@ -11,7 +13,7 @@ import {
 } from '../redux/threads/action';
 import useInput from '../hooks/useInput';
 import ThreadCategoryList from '../components/ThreadCategoryList';
-// import ThreadList from '../components/ThreadList';
+import ThreadList from '../components/ThreadList';
 
 function HomePage({ authUser }) {
   const dispatch = useDispatch();
@@ -62,9 +64,22 @@ function HomePage({ authUser }) {
           </Text>
           <ThreadCategoryList onCategoryChange={onCategoryChange} />
         </header>
-        <Heading as="h2" size="lg" mb={4}>
+        <Heading as="h2" size="lg" mb={8} mt={2}>
           Explore Threads
         </Heading>
+        {category ? (
+          <ThreadList
+            threads={threadCategory}
+            onUpVoteThread={onUpVoteThread}
+            onDownVoteThread={onDownVoteThread}
+          />
+        ) : (
+          <ThreadList
+            threads={threadList}
+            onUpVoteThread={onUpVoteThread}
+            onDownVoteThread={onDownVoteThread}
+          />
+        )}
       </Box>
       {authUser && (
         <IconButton

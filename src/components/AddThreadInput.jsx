@@ -1,34 +1,24 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import {
   FormControl,
   FormLabel,
   Input,
-  Text,
   Textarea,
 } from '@chakra-ui/react';
 import useInput from '../hooks/useInput';
 import CTAButton from './CTAButton';
 
 function AddThreadInput({ addThread }) {
-  const MAX_BODY_LENGTH = 320;
-
   const [title, onTitleChange] = useInput('');
   const [category, onCategoryChange] = useInput('');
-  const [body, setBody] = useState('');
+  const [body, onBodyChange] = useInput('');
 
   const addThreadHandler = () => {
     if (title.trim() && body.trim() && category.trim()) {
       addThread(title, body, category);
     } else {
       alert('Please fill in all the fields');
-    }
-  };
-
-  const handleBodyChange = (event) => {
-    const inputValue = event.target.value;
-    if (inputValue.length <= MAX_BODY_LENGTH) {
-      setBody(inputValue);
     }
   };
 
@@ -60,14 +50,9 @@ function AddThreadInput({ addThread }) {
           id="body"
           rounded="lg"
           value={body}
-          onChange={handleBodyChange}
+          onChange={onBodyChange}
         />
       </FormControl>
-      <Text textAlign="right" color="gray">
-        {body.length}
-        /
-        {MAX_BODY_LENGTH}
-      </Text>
       <CTAButton action="Add Thread" onClick={addThreadHandler} />
     </form>
   );
