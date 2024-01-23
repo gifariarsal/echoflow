@@ -1,8 +1,8 @@
 import {
-  Avatar, Box, Button, Flex, Icon, Image, Text
+  Avatar, Box, Button, Flex, Image, Text
 } from '@chakra-ui/react';
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import {
   IoBarChartOutline,
   IoLogInOutline,
@@ -12,10 +12,6 @@ import {
 import PropTypes from 'prop-types';
 
 function Navbar({ authUser, onLogOut }) {
-  const navigate = useNavigate();
-  const onLogIn = () => {
-    navigate('/login');
-  };
   return (
     <header>
       <Flex
@@ -23,7 +19,7 @@ function Navbar({ authUser, onLogOut }) {
         zIndex={10}
         bg="white"
         color="#1c1c1c"
-        minH="60px"
+        h="60px"
         borderBottom={1}
         borderStyle="solid"
         borderColor="#F6B3CF"
@@ -42,14 +38,18 @@ function Navbar({ authUser, onLogOut }) {
             />
           </Link>
           <Link to="/">
-            <Button variant="ghost" color="dark" _hover={{ bg: 'gray.100' }}>
-              <Icon as={IoHomeOutline} mr={2} />
+            <Button
+              variant="ghost"
+              leftIcon={<IoHomeOutline />}
+            >
               Home
             </Button>
           </Link>
           <Link to="/leaderboards">
-            <Button variant="ghost" color="dark" _hover={{ bg: 'gray.100' }}>
-              <Icon as={IoBarChartOutline} mr={2} />
+            <Button
+              variant="ghost"
+              leftIcon={<IoBarChartOutline />}
+            >
               Leaderboards
             </Button>
           </Link>
@@ -59,25 +59,29 @@ function Navbar({ authUser, onLogOut }) {
             <Avatar name={authUser?.name} src={authUser?.avatar} size="sm" />
             <Text>
               Hi,
-              {' '}
               {authUser?.name}
             </Text>
-            <Button onClick={onLogOut} variant="ghost" colorScheme="red">
-              <Icon as={IoLogOutOutline} mr={2} />
+            <Button
+              onClick={onLogOut}
+              variant="ghost"
+              leftIcon={<IoLogOutOutline />}
+              colorScheme="red"
+            >
               Logout
             </Button>
           </Box>
         ) : (
-          <Button
-            onClick={onLogIn}
-            color="white"
-            bg="brand.main"
-            _hover={{ bg: 'brand.hover' }}
-            _active={{ bg: 'brand.active' }}
-          >
-            <Icon as={IoLogInOutline} mr={2} />
-            Login
-          </Button>
+          <Link to="/login">
+            <Button
+              color="white"
+              bg="brand.main"
+              leftIcon={<IoLogInOutline />}
+              _hover={{ bg: 'brand.hover' }}
+              _active={{ bg: 'brand.active' }}
+            >
+              Login
+            </Button>
+          </Link>
         )}
       </Flex>
     </header>
