@@ -3,13 +3,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import React, { useEffect } from 'react';
 import { asyncPreloadProcess } from './redux/isPreload/action';
 import { asyncUnsetAuthUser } from './redux/authUser/action';
+import {
+  AddThreadPage,
+  HomePage,
+  LeaderboardsPage,
+  LoginPage,
+  RegisterPage,
+  ThreadDetailPage,
+} from './pages';
 import Navbar from './components/Navbar';
-import HomePage from './pages/HomePage';
-import LoginPage from './pages/LoginPage';
-import RegisterPage from './pages/RegisterPage';
-import LeaderboardsPage from './pages/LeaderboardsPage';
 import Loading from './components/Loading';
-import AddThreadPage from './pages/AddThreadPage';
 
 function App() {
   const dispatch = useDispatch();
@@ -39,6 +42,7 @@ function App() {
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/leaderboards" element={<LeaderboardsPage />} />
+            <Route path="/threads/:id" element={<ThreadDetailPage />} />
           </Routes>
         </main>
       </>
@@ -54,6 +58,7 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/leaderboards" element={<LeaderboardsPage />} />
+          <Route path="/threads/:id" element={<ThreadDetailPage />} />
           <Route path="/add-thread" element={<AddThreadPage />} />
         </Routes>
       </main>

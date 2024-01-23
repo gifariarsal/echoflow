@@ -1,16 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import parse from 'html-react-parser';
-import { useNavigate } from 'react-router-dom';
-import { Box, Heading, Text } from '@chakra-ui/react';
-import {
-  BiUpvote,
-  BiSolidUpvote,
-  BiDownvote,
-  BiSolidDownvote,
-  BiCommentDetail,
-} from 'react-icons/bi';
-import { postedAt } from '../utils';
+import { Box } from '@chakra-ui/react';
+import ThreadItemHeader from './ThreadItemHeader';
+import ThreadItemFooter from './ThreadItemFooter';
 
 function ThreadItem({
   id,
@@ -26,43 +19,34 @@ function ThreadItem({
   onDownVoteThread,
   isLastItem,
 }) {
-  const navigate = useNavigate();
-
-  const onThreadDetail = () => {
-    navigate(`/thread/${id}`);
-  };
-
   return (
     <Box
       mb={8}
       borderBottom={isLastItem ? '0' : '1px solid'}
       borderColor="silver"
     >
-      <header>
-        <Text color="brand.main" mb={2}>{`#${category}`}</Text>
-        <Heading as="h4" fontSize="xl" mb={2}>
-          {title}
-        </Heading>
-        <Text fontSize="sm" color="gray" mb={4}>
-          {'by '}
-          <Text as="strong" fontWeight="bold">
-            {user.name}
-          </Text>
-          {' • '}
-          <Text as="time" dateTime={createdAt}>
-            {postedAt(createdAt)}
-          </Text>
-        </Text>
-      </header>
+      <ThreadItemHeader
+        {...{
+          id,
+          category,
+          title,
+          user,
+          createdAt,
+        }}
+      />
       <Box noOfLines={4} mb={4}>
         {parse(body)}
       </Box>
-      <footer>
-        <Text display="flex" alignItems="center" gap={1} mb={4}>
-          <BiCommentDetail />
-          {totalComments}
-        </Text>
-      </footer>
+      <ThreadItemFooter
+        {...{
+          id,
+          totalComments,
+          upVotesBy,
+          downVotesBy,
+          onUpVoteThread,
+          onDownVoteThread,
+        }}
+      />
     </Box>
   );
 }
