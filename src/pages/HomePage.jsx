@@ -48,7 +48,7 @@ function HomePage() {
   const threadList = threads.map((thread) => ({
     ...thread,
     user: users.find((user) => user.id === thread.ownerId),
-    authUser: authUser.id,
+    authUser: authUser?.id,
   }));
 
   const threadCategory = threadList.filter(

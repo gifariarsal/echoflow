@@ -1,4 +1,4 @@
-import { Button, Text } from '@chakra-ui/react';
+import { Button } from '@chakra-ui/react';
 import PropTypes from 'prop-types';
 import React from 'react';
 
@@ -7,15 +7,15 @@ function ThreadItemFooterButton({ icon, value, onClick }) {
     <Button
       type="button"
       variant="ghost"
+      display="flex"
+      alignItems="center"
       rounded="full"
       fontWeight="normal"
       p={1}
       onClick={onClick}
+      leftIcon={icon}
     >
-      <Text display="flex" alignItems="center" gap={1}>
-        {icon}
-        {value}
-      </Text>
+      {value}
     </Button>
   );
 }

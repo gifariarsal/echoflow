@@ -70,9 +70,9 @@ const threadItemShape = {
   title: PropTypes.string.isRequired,
   category: PropTypes.string.isRequired,
   user: PropTypes.shape(userShape).isRequired,
-  authUser: PropTypes.string.isRequired,
   upVotesBy: PropTypes.arrayOf(PropTypes.string).isRequired,
   downVotesBy: PropTypes.arrayOf(PropTypes.string).isRequired,
+  authUser: PropTypes.string
 };
 
 ThreadItem.propTypes = {
