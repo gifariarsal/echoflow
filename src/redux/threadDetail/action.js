@@ -37,19 +37,21 @@ function clearThreadDetailActionCreator() {
   };
 }
 
-function toggleUpVoteThreadDetailActionCreator(userId) {
+function toggleUpVoteThreadDetailActionCreator({ threadId, userId }) {
   return {
     type: ActionType.TOGGLE_UP_VOTE_THREAD_DETAIL,
     payload: {
+      threadId,
       userId,
     },
   };
 }
 
-function toggleDownVoteThreadDetailActionCreator(userId) {
+function toggleDownVoteThreadDetailActionCreator({ threadId, userId }) {
   return {
     type: ActionType.TOGGLE_DOWN_VOTE_THREAD_DETAIL,
     payload: {
+      threadId,
       userId,
     },
   };

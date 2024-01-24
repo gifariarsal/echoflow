@@ -33,7 +33,7 @@ function App() {
     return null;
   }
 
-  if (authUser === null) {
+  if (!authUser) {
     return (
       <>
         <Loading />
@@ -56,7 +56,7 @@ function App() {
       <Navbar authUser={authUser} onLogOut={onLogOut} />
       <main>
         <Routes>
-          <Route path="/" element={<HomePage authUser={authUser} />} />
+          <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/leaderboards" element={<LeaderboardsPage />} />
