@@ -6,7 +6,8 @@ const ActionType = {
   RECEIVE_THREADS: 'RECEIVE_THREADS',
   TOGGLE_UP_VOTE_THREAD: 'TOGGLE_UP_VOTE_THREAD',
   TOGGLE_DOWN_VOTE_THREAD: 'TOGGLE_DOWN_VOTE_THREAD',
-  CLEAR_VOTE_THREAD: 'CLEAR_VOTE_THREAD',
+  TOGGLE_NEUTRAL_UP_VOTE_THREAD: 'TOGGLE_NEUTRAL_UP_VOTE_THREAD',
+  TOGGLE_NEUTRAL_DOWN_VOTE_THREAD: 'TOGGLE_NEUTRAL_DOWN_VOTE_THREAD',
 };
 
 function addThreadActionCreator(thread) {
@@ -47,9 +48,19 @@ function toggleDownVoteThreadActionCreator({ threadId, userId }) {
   };
 }
 
-function toggleNeutralizeVoteThreadActionCreator({ threadId, userId }) {
+function toggleNeutralUpVoteThreadActionCreator({ threadId, userId }) {
   return {
-    type: ActionType.TOGGLE_NEUTRALIZE_UP_VOTE_THREAD,
+    type: ActionType.TOGGLE_NEUTRAL_UP_VOTE_THREAD,
+    payload: {
+      threadId,
+      userId,
+    },
+  };
+}
+
+function toggleNeutralDownVoteThreadActionCreator({ threadId, userId }) {
+  return {
+    type: ActionType.TOGGLE_NEUTRAL_DOWN_VOTE_THREAD,
     payload: {
       threadId,
       userId,
@@ -108,25 +119,48 @@ function asyncToggleDownVoteThread(threadId) {
   };
 }
 
-function asyncToggleNeutralizeUpVoteThread(threadId) {
+function asyncToggleNeutralUpVoteThread(threadId) {
   return async (dispatch, getState) => {
-    dispatch(showLoading());
     const { authUser } = getState();
     dispatch(
-      toggleNeutralizeVoteThreadActionCreator({ threadId, userId: authUser.id })
+      toggleNeutralUpVoteThreadActionCreator({ threadId, userId: authUser.id })
     );
+
     try {
       await api.toggleNeutralizeVoteThread(threadId);
     } catch (error) {
       alert(error.message);
       dispatch(
-        toggleNeutralizeVoteThreadActionCreator({
+        toggleNeutralUpVoteThreadActionCreator({
           threadId,
           userId: authUser.id,
         })
       );
     }
-    dispatch(hideLoading());
+  };
+}
+
+function asyncToggleNeutralDownVoteThread(threadId) {
+  return async (dispatch, getState) => {
+    const { authUser } = getState();
+    dispatch(
+      toggleNeutralDownVoteThreadActionCreator({
+        threadId,
+        userId: authUser.id,
+      })
+    );
+
+    try {
+      await api.toggleNeutralizeVoteThread(threadId);
+    } catch (error) {
+      alert(error.message);
+      dispatch(
+        toggleNeutralDownVoteThreadActionCreator({
+          threadId,
+          userId: authUser.id,
+        })
+      );
+    }
   };
 }
 
@@ -136,8 +170,11 @@ export {
   addThreadActionCreator,
   toggleUpVoteThreadActionCreator,
   toggleDownVoteThreadActionCreator,
+  toggleNeutralUpVoteThreadActionCreator,
+  toggleNeutralDownVoteThreadActionCreator,
   asyncAddTread,
   asyncToggleUpVoteThread,
   asyncToggleDownVoteThread,
-  asyncToggleNeutralizeUpVoteThread,
+  asyncToggleNeutralUpVoteThread,
+  asyncToggleNeutralDownVoteThread,
 };

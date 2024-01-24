@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import PropTypes from 'prop-types';
 import {
   Box, Heading, IconButton, Text
 } from '@chakra-ui/react';
@@ -10,18 +9,21 @@ import { asyncPopulateUsersAndThreads } from '../redux/shared/action';
 import {
   asyncToggleUpVoteThread,
   asyncToggleDownVoteThread,
+  asyncToggleNeutralUpVoteThread,
+  asyncToggleNeutralDownVoteThread,
 } from '../redux/threads/action';
 import useInput from '../hooks/useInput';
 import ThreadCategoryList from '../components/ThreadCategoryList';
 import ThreadList from '../components/ThreadList';
 
-function HomePage({ authUser }) {
+function HomePage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [category, onCategoryChange] = useInput('');
 
   const threads = useSelector((state) => state.threads);
   const users = useSelector((state) => state.users);
+  const authUser = useSelector((state) => state.authUser);
 
   useEffect(() => {
     dispatch(asyncPopulateUsersAndThreads());
@@ -35,9 +37,18 @@ function HomePage({ authUser }) {
     dispatch(asyncToggleDownVoteThread(id));
   };
 
+  const onNeutralizeUpVoteThread = (id) => {
+    dispatch(asyncToggleNeutralUpVoteThread(id));
+  };
+
+  const onNeutralizeDownVoteThread = (id) => {
+    dispatch(asyncToggleNeutralDownVoteThread(id));
+  };
+
   const threadList = threads.map((thread) => ({
     ...thread,
     user: users.find((user) => user.id === thread.ownerId),
+    authUser: authUser.id,
   }));
 
   const threadCategory = threadList.filter(
@@ -67,19 +78,13 @@ function HomePage({ authUser }) {
         <Heading as="h2" size="lg" mb={8} mt={2}>
           Explore Threads
         </Heading>
-        {category ? (
-          <ThreadList
-            threads={threadCategory}
-            onUpVoteThread={onUpVoteThread}
-            onDownVoteThread={onDownVoteThread}
-          />
-        ) : (
-          <ThreadList
-            threads={threadList}
-            onUpVoteThread={onUpVoteThread}
-            onDownVoteThread={onDownVoteThread}
-          />
-        )}
+        <ThreadList
+          threads={category ? threadCategory : threadList}
+          onUpVoteThread={onUpVoteThread}
+          onDownVoteThread={onDownVoteThread}
+          onNeutralizeUpVoteThread={onNeutralizeUpVoteThread}
+          onNeutralizeDownVoteThread={onNeutralizeDownVoteThread}
+        />
       </Box>
       {authUser && (
         <IconButton
@@ -100,17 +105,5 @@ function HomePage({ authUser }) {
     </Box>
   );
 }
-
-const userShape = {
-  id: PropTypes.string.isRequired,
-};
-
-HomePage.propTypes = {
-  authUser: PropTypes.shape(userShape),
-};
-
-HomePage.defaultProps = {
-  authUser: null,
-};
 
 export default HomePage;

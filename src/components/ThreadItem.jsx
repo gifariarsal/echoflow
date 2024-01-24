@@ -12,11 +12,14 @@ function ThreadItem({
   category,
   createdAt,
   user,
+  authUser,
   upVotesBy,
   downVotesBy,
   totalComments,
   onUpVoteThread,
   onDownVoteThread,
+  onNeutralizeUpVoteThread,
+  onNeutralizeDownVoteThread,
   isLastItem,
 }) {
   return (
@@ -45,6 +48,9 @@ function ThreadItem({
           downVotesBy,
           onUpVoteThread,
           onDownVoteThread,
+          onNeutralizeUpVoteThread,
+          onNeutralizeDownVoteThread,
+          authUser,
         }}
       />
     </Box>
@@ -64,6 +70,7 @@ const threadItemShape = {
   title: PropTypes.string.isRequired,
   category: PropTypes.string.isRequired,
   user: PropTypes.shape(userShape).isRequired,
+  authUser: PropTypes.string.isRequired,
   upVotesBy: PropTypes.arrayOf(PropTypes.string).isRequired,
   downVotesBy: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
@@ -72,11 +79,17 @@ ThreadItem.propTypes = {
   ...threadItemShape,
   onUpVoteThread: PropTypes.func,
   onDownVoteThread: PropTypes.func,
+  onNeutralizeUpVoteThread: PropTypes.func,
+  onNeutralizeDownVoteThread: PropTypes.func,
+  isLastItem: PropTypes.bool,
 };
 
 ThreadItem.defaultProps = {
   onUpVoteThread: null,
   onDownVoteThread: null,
+  onNeutralizeUpVoteThread: null,
+  onNeutralizeDownVoteThread: null,
+  isLastItem: false,
 };
 
 export { threadItemShape };

@@ -36,17 +36,26 @@ function threadReducer(threads = [], action = {}) {
         }
         return thread;
       });
-    case ActionType.TOGGLE_NEUTRALIZE_UP_VOTE_THREAD:
+    case ActionType.TOGGLE_NEUTRAL_UP_VOTE_THREAD:
       return threads.map((thread) => {
         if (thread.id === action.payload.threadId) {
           return {
             ...thread,
-            downVotesBy: thread.downVotesBy.includes(action.payload.userId)
-              ? thread.downVotesBy.filter((id) => id !== action.payload.userId)
-              : thread.downVotesBy,
-            upVotesBy: thread.upVotesBy.includes(action.payload.userId)
-              ? thread.upVotesBy.filter((id) => id !== action.payload.userId)
-              : thread.upVotesBy,
+            upVotesBy:
+              thread.upVotesBy.includes(action.payload.userId)
+              && thread.upVotesBy.filter((id) => id !== action.payload.userId),
+          };
+        }
+        return thread;
+      });
+    case ActionType.TOGGLE_NEUTRAL_DOWN_VOTE_THREAD:
+      return threads.map((thread) => {
+        if (thread.id === action.payload.threadId) {
+          return {
+            ...thread,
+            downVotesBy:
+              thread.downVotesBy.includes(action.payload.userId)
+              && thread.downVotesBy.filter((id) => id !== action.payload.userId),
           };
         }
         return thread;
