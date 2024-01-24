@@ -5,7 +5,6 @@ import {
   BiSolidUpvote,
   BiDownvote,
   BiSolidDownvote,
-  BiCommentDetail,
 } from 'react-icons/bi';
 import parse from 'html-react-parser';
 import { Avatar, Box, Heading, Text } from '@chakra-ui/react';
@@ -26,6 +25,8 @@ function ThreadDetail({
   onAddComment,
   onUpVoteThreadDetail,
   onDownVoteThreadDetail,
+  onNeutralizeUpVoteThreadDetail,
+  onNeutralizeDownVoteThreadDetail,
 }) {
   const hasVotedUp = upVotesBy.includes(authUser);
   const hasVotedDown = downVotesBy.includes(authUser);
@@ -33,24 +34,24 @@ function ThreadDetail({
   const onClickUpVote = (event) => {
     event.stopPropagation();
     if (!hasVotedUp && !hasVotedDown) {
-      onUpVoteThread(id);
+      onUpVoteThreadDetail(id);
     } else if (hasVotedDown) {
-      onNeutralizeDownVoteThread(id);
-      onUpVoteThread(id);
+      onNeutralizeDownVoteThreadDetail(id);
+      onUpVoteThreadDetail(id);
     } else if (hasVotedUp) {
-      onNeutralizeUpVoteThread(id);
+      onNeutralizeUpVoteThreadDetail(id);
     }
   };
 
   const onClickDownVote = (event) => {
     event.stopPropagation();
     if (!hasVotedUp && !hasVotedDown) {
-      onDownVoteThread(id);
+      onDownVoteThreadDetail(id);
     } else if (hasVotedUp) {
-      onNeutralizeUpVoteThread(id);
-      onDownVoteThread(id);
+      onNeutralizeUpVoteThreadDetail(id);
+      onDownVoteThreadDetail(id);
     } else if (hasVotedDown) {
-      onNeutralizeDownVoteThread(id);
+      onNeutralizeDownVoteThreadDetail(id);
     }
   };
   return (
@@ -107,5 +108,40 @@ function ThreadDetail({
     </Box>
   );
 }
+
+const userShape = {
+  id: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  avatar: PropTypes.string.isRequired,
+};
+
+ThreadDetail.propTypes = {
+  id: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  body: PropTypes.string.isRequired,
+  category: PropTypes.string.isRequired,
+  createdAt: PropTypes.string.isRequired,
+  owner: PropTypes.shape(userShape).isRequired,
+  upVotesBy: PropTypes.arrayOf(PropTypes.string).isRequired,
+  downVotesBy: PropTypes.arrayOf(PropTypes.string).isRequired,
+  // comments: PropTypes.arrayOf(PropTypes.shape(threadCommentItemShape))
+  //   .isRequired,
+  authUser: PropTypes.string.isRequired,
+  onUpVoteThreadDetail: PropTypes.func,
+  onDownVoteThreadDetail: PropTypes.func,
+  onNeutralizeUpVoteThreadDetail: PropTypes.func,
+  onNeutralizeDownVoteThreadDetail: PropTypes.func,
+  onAddComment: PropTypes.func,
+};
+
+ThreadDetail.defaultProps = {
+  onUpVoteThreadDetail: null,
+  onDownVoteThreadDetail: null,
+  onNeutralizeUpVoteThreadDetail: null,
+  onNeutralizeDownVoteThreadDetail: null,
+  onAddComment: null,
+};
+
+export { userShape };
 
 export default ThreadDetail;
