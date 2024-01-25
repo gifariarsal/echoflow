@@ -1,4 +1,6 @@
-import { Box, Heading, Text, Textarea } from '@chakra-ui/react';
+import {
+  Box, Heading, Text, Textarea
+} from '@chakra-ui/react';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
@@ -6,15 +8,15 @@ import CTAButton from './CTAButton';
 import ThreadCommentItem from './ThreadCommentItem';
 
 function ThreadComment({
-  comments,
+  threadDetail,
   authUser,
   onAddComment,
   onUpVoteComment,
   onDownVoteComment,
 }) {
   const MAX_CONTENT_LENGTH = 300;
-
   const [content, setContent] = React.useState('');
+  const { comments } = threadDetail;
 
   const handleCommentChange = (event) => {
     const inputValue = event.target.value;
@@ -45,18 +47,22 @@ function ThreadComment({
             onChange={handleCommentChange}
           />
           <Text textAlign="right" color="gray">
-            {content.length}/{MAX_CONTENT_LENGTH}
+            {content.length}
+            /
+            {MAX_CONTENT_LENGTH}
           </Text>
           <CTAButton action="Add Comment" onClick={handleAddComment} />
         </Box>
       ) : (
         <Box display="flex" alignItems="center" gap={1}>
-          Please{' '}
+          Please
+          {' '}
           <Link to="/login">
             <Text color="brand.main" _hover={{ textDecoration: 'underline' }}>
               login
             </Text>
-          </Link>{' '}
+          </Link>
+          {' '}
           to leave a comment
         </Box>
       )}
@@ -87,9 +93,30 @@ const userCommentShape = {
   avatar: PropTypes.string.isRequired,
 };
 
+const commentItemShape = {
+  id: PropTypes.string,
+  content: PropTypes.string,
+  createdAt: PropTypes.string,
+  owner: PropTypes.shape(userCommentShape),
+  upVotesCommentBy: PropTypes.arrayOf(PropTypes.string),
+  downVotesCommentBy: PropTypes.arrayOf(PropTypes.string),
+};
+
+const detailThreadShape = {
+  id: PropTypes.string,
+  title: PropTypes.string,
+  body: PropTypes.string,
+  category: PropTypes.string,
+  createdAt: PropTypes.string,
+  owner: PropTypes.shape(userCommentShape),
+  upVotesBy: PropTypes.arrayOf(PropTypes.string),
+  downVotesBy: PropTypes.arrayOf(PropTypes.string),
+  comments: PropTypes.arrayOf(PropTypes.shape(commentItemShape)),
+};
+
 ThreadComment.propTypes = {
+  threadDetail: PropTypes.shape(detailThreadShape).isRequired,
   authUser: PropTypes.shape(userCommentShape),
-  comments: PropTypes.arrayOf(PropTypes.object).isRequired,
   onAddComment: PropTypes.func.isRequired,
   onUpVoteComment: PropTypes.func.isRequired,
   onDownVoteComment: PropTypes.func.isRequired,

@@ -13,6 +13,7 @@ import {
   asyncToggleDownVoteCommentDetail,
 } from '../redux/threadDetail/action';
 import ThreadDetail from '../components/ThreadDetail';
+import ThreadComment from '../components/ThreadComment';
 
 function ThreadDetailPage() {
   const { id } = useParams();
@@ -69,11 +70,15 @@ function ThreadDetailPage() {
         <ThreadDetail
           {...threadDetail}
           authUser={authUser}
-          onAddComment={onAddComment}
           onUpVoteThreadDetail={onUpVoteThreadDetail}
           onDownVoteThreadDetail={onDownVoteThreadDetail}
           onNeutralizeUpVoteThreadDetail={onNeutralizeUpVoteThreadDetail}
           onNeutralizeDownVoteThreadDetail={onNeutralizeDownVoteThreadDetail}
+        />
+        <ThreadComment
+          threadDetail={threadDetail}
+          authUser={authUser}
+          onAddComment={onAddComment}
           onUpVoteComment={onUpVoteComment}
           onDownVoteComment={onDownVoteComment}
         />

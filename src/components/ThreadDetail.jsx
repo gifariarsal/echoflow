@@ -12,8 +12,6 @@ import {
 } from '@chakra-ui/react';
 import { postedAt } from '../utils';
 import ThreadItemFooterButton from './ThreadItemFooterButton';
-import ThreadComment from './ThreadComment';
-import { threadCommentItemShape } from './ThreadCommentItem';
 
 function ThreadDetail({
   id,
@@ -24,18 +22,14 @@ function ThreadDetail({
   owner,
   upVotesBy,
   downVotesBy,
-  comments,
   authUser,
-  onAddComment,
   onUpVoteThreadDetail,
   onDownVoteThreadDetail,
   onNeutralizeUpVoteThreadDetail,
   onNeutralizeDownVoteThreadDetail,
-  onUpVoteComment,
-  onDownVoteComment,
 }) {
-  const hasVotedUp = upVotesBy.includes(authUser);
-  const hasVotedDown = downVotesBy.includes(authUser);
+  const hasVotedUp = upVotesBy.includes(authUser?.id);
+  const hasVotedDown = downVotesBy.includes(authUser?.id);
 
   const onClickUpVote = (event) => {
     event.stopPropagation();
@@ -111,13 +105,6 @@ function ThreadDetail({
           </Box>
         </footer>
       </Box>
-      <ThreadComment
-        comments={comments}
-        authUser={authUser}
-        onAddComment={onAddComment}
-        onUpVoteComment={onUpVoteComment}
-        onDownVoteComment={onDownVoteComment}
-      />
     </Box>
   );
 }
@@ -137,16 +124,11 @@ ThreadDetail.propTypes = {
   owner: PropTypes.shape(userShape).isRequired,
   upVotesBy: PropTypes.arrayOf(PropTypes.string).isRequired,
   downVotesBy: PropTypes.arrayOf(PropTypes.string).isRequired,
-  comments: PropTypes.arrayOf(PropTypes.shape(threadCommentItemShape))
-    .isRequired,
   authUser: PropTypes.shape(userShape),
   onUpVoteThreadDetail: PropTypes.func,
   onDownVoteThreadDetail: PropTypes.func,
   onNeutralizeUpVoteThreadDetail: PropTypes.func,
   onNeutralizeDownVoteThreadDetail: PropTypes.func,
-  onAddComment: PropTypes.func,
-  onUpVoteComment: PropTypes.func,
-  onDownVoteComment: PropTypes.func,
 };
 
 ThreadDetail.defaultProps = {
@@ -155,9 +137,6 @@ ThreadDetail.defaultProps = {
   onDownVoteThreadDetail: null,
   onNeutralizeUpVoteThreadDetail: null,
   onNeutralizeDownVoteThreadDetail: null,
-  onAddComment: null,
-  onUpVoteComment: null,
-  onDownVoteComment: null,
 };
 
 export { userShape };
