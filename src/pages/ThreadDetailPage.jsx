@@ -9,6 +9,8 @@ import {
   asyncToggleNeutralDownVoteThreadDetail,
   asyncToggleNeutralUpVoteThreadDetail,
   asyncToggleUpVoteThreadDetail,
+  asyncToggleUpVoteCommentDetail,
+  asyncToggleDownVoteCommentDetail,
 } from '../redux/threadDetail/action';
 import ThreadDetail from '../components/ThreadDetail';
 
@@ -42,6 +44,14 @@ function ThreadDetailPage() {
     dispatch(asyncToggleNeutralDownVoteThreadDetail(threadId));
   };
 
+  const onUpVoteComment = (commentId) => {
+    dispatch(asyncToggleUpVoteCommentDetail(commentId));
+  };
+
+  const onDownVoteComment = (commentId) => {
+    dispatch(asyncToggleDownVoteCommentDetail(commentId));
+  };
+
   if (!threadDetail) {
     return null;
   }
@@ -64,6 +74,8 @@ function ThreadDetailPage() {
           onDownVoteThreadDetail={onDownVoteThreadDetail}
           onNeutralizeUpVoteThreadDetail={onNeutralizeUpVoteThreadDetail}
           onNeutralizeDownVoteThreadDetail={onNeutralizeDownVoteThreadDetail}
+          onUpVoteComment={onUpVoteComment}
+          onDownVoteComment={onDownVoteComment}
         />
       </Box>
     </Box>

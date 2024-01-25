@@ -11,7 +11,7 @@ function ThreadItemHeader({
     <header>
       <Text color="brand.main" mb={2}>{`#${category}`}</Text>
       <Heading
-        as="h4"
+        as="h2"
         fontSize="xl"
         mb={2}
         noOfLines={1}
