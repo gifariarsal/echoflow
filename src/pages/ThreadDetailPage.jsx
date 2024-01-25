@@ -68,7 +68,7 @@ function ThreadDetailPage() {
       >
         <ThreadDetail
           {...threadDetail}
-          authUser={authUser.id}
+          authUser={authUser}
           onAddComment={onAddComment}
           onUpVoteThreadDetail={onUpVoteThreadDetail}
           onDownVoteThreadDetail={onDownVoteThreadDetail}

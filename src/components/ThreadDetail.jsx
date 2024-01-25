@@ -7,10 +7,13 @@ import {
   BiSolidDownvote,
 } from 'react-icons/bi';
 import parse from 'html-react-parser';
-import { Avatar, Box, Heading, Text } from '@chakra-ui/react';
+import {
+  Avatar, Box, Heading, Text
+} from '@chakra-ui/react';
 import { postedAt } from '../utils';
 import ThreadItemFooterButton from './ThreadItemFooterButton';
 import ThreadComment from './ThreadComment';
+import { threadCommentItemShape } from './ThreadCommentItem';
 
 function ThreadDetail({
   id,
@@ -110,6 +113,7 @@ function ThreadDetail({
       </Box>
       <ThreadComment
         comments={comments}
+        authUser={authUser}
         onAddComment={onAddComment}
         onUpVoteComment={onUpVoteComment}
         onDownVoteComment={onDownVoteComment}
@@ -133,9 +137,9 @@ ThreadDetail.propTypes = {
   owner: PropTypes.shape(userShape).isRequired,
   upVotesBy: PropTypes.arrayOf(PropTypes.string).isRequired,
   downVotesBy: PropTypes.arrayOf(PropTypes.string).isRequired,
-  // comments: PropTypes.arrayOf(PropTypes.shape(threadCommentItemShape))
-  //   .isRequired,
-  authUser: PropTypes.string.isRequired,
+  comments: PropTypes.arrayOf(PropTypes.shape(threadCommentItemShape))
+    .isRequired,
+  authUser: PropTypes.shape(userShape),
   onUpVoteThreadDetail: PropTypes.func,
   onDownVoteThreadDetail: PropTypes.func,
   onNeutralizeUpVoteThreadDetail: PropTypes.func,
@@ -146,6 +150,7 @@ ThreadDetail.propTypes = {
 };
 
 ThreadDetail.defaultProps = {
+  authUser: null,
   onUpVoteThreadDetail: null,
   onDownVoteThreadDetail: null,
   onNeutralizeUpVoteThreadDetail: null,
