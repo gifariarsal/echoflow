@@ -67,16 +67,18 @@ function ThreadComment({
         </Box>
       )}
       <Box>
-        <Heading as="h3" fontSize="lg" mt={10} mb={6}>
+        <Heading as="h3" fontSize="lg" mt={10} mb={4}>
           {`Comments (${comments.length})`}
         </Heading>
         {comments.length > 0 ? (
-          comments.map((comment) => (
+          comments.map((comment, index) => (
             <ThreadCommentItem
               key={comment.id}
               {...comment}
               onUpVoteComment={onUpVoteComment}
               onDownVoteComment={onDownVoteComment}
+              authUser={authUser}
+              isLastItem={index === comments.length - 1}
             />
           ))
         ) : (

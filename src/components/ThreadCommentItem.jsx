@@ -1,8 +1,15 @@
 import { Avatar, Box, Text } from '@chakra-ui/react';
 import React from 'react';
 import PropTypes from 'prop-types';
+import {
+  BiUpvote,
+  BiSolidUpvote,
+  BiDownvote,
+  BiSolidDownvote,
+} from 'react-icons/bi';
 import parse from 'html-react-parser';
 import { postedAt } from '../utils';
+import ThreadItemFooterButton from './ThreadItemFooterButton';
 
 function ThreadCommentItem({
   content,
@@ -10,9 +17,19 @@ function ThreadCommentItem({
   owner,
   upVotesBy,
   downVotesBy,
+  authUser,
+  isLastItem,
 }) {
+  const hasVotedUp = upVotesBy.includes(authUser);
+  const hasVotedDown = downVotesBy.includes(authUser);
   return (
-    <Box as="section">
+    <Box
+      as="section"
+      pt={4}
+      pb={2}
+      borderBottom={isLastItem ? '0' : '1px solid'}
+      borderColor="silver"
+    >
       <Text
         as="header"
         display="flex"
@@ -29,6 +46,22 @@ function ThreadCommentItem({
         </Text>
       </Text>
       <Text>{parse(content)}</Text>
+      <Box display="flex" alignItems="center" gap={4} mt={2}>
+        <ThreadItemFooterButton
+          icon={hasVotedUp ? <BiSolidUpvote color="green" /> : <BiUpvote />}
+          value={upVotesBy.length}
+          // onClick={
+          //   authUser ? onClickUpVote : () => alert('Please login to upvote')
+          // }
+        />
+        <ThreadItemFooterButton
+          icon={hasVotedDown ? <BiSolidDownvote color="red" /> : <BiDownvote />}
+          value={downVotesBy.length}
+          // onClick={
+          //   authUser ? onClickDownVote : () => alert('Please login to downvote')
+          // }
+        />
+      </Box>
     </Box>
   );
 }
@@ -50,6 +83,11 @@ const threadCommentItemShape = {
 
 ThreadCommentItem.propTypes = {
   ...threadCommentItemShape,
+  isLastItem: PropTypes.bool,
+};
+
+ThreadCommentItem.defaultProps = {
+  isLastItem: false,
 };
 
 export { threadCommentItemShape };
