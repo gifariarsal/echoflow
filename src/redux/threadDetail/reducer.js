@@ -76,6 +76,38 @@ function threadDetailReducer(threadDetail = null, action = {}) {
           return comment;
         }),
       };
+    case ActionType.TOGGLE_NEUTRAL_UP_VOTE_COMMENT_DETAIL:
+      return {
+        ...threadDetail,
+        comments: threadDetail.comments.map((comment) => {
+          if (comment.id === action.payload.commentId) {
+            return {
+              ...comment,
+              upVotesBy: comment.upVotesBy.includes(action.payload.userId)
+                ? comment.upVotesBy.filter((id) => id !== action.payload.userId)
+                : comment.upVotesBy,
+            };
+          }
+          return comment;
+        }),
+      };
+    case ActionType.TOGGLE_NEUTRAL_DOWN_VOTE_COMMENT_DETAIL:
+      return {
+        ...threadDetail,
+        comments: threadDetail.comments.map((comment) => {
+          if (comment.id === action.payload.commentId) {
+            return {
+              ...comment,
+              downVotesBy: comment.downVotesBy.includes(action.payload.userId)
+                ? comment.downVotesBy.filter(
+                  (id) => id !== action.payload.userId
+                )
+                : comment.downVotesBy,
+            };
+          }
+          return comment;
+        }),
+      };
     case ActionType.CLEAR_VOTE_COMMENT_DETAIL:
       return {
         ...threadDetail,

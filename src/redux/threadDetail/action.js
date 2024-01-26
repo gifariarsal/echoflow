@@ -11,7 +11,9 @@ const ActionType = {
     'TOGGLE_NEUTRAL_DOWN_VOTE_THREAD_DETAIL',
   TOGGLE_UP_VOTE_COMMENT_DETAIL: 'TOGGLE_UP_VOTE_COMMENT_DETAIL',
   TOGGLE_DOWN_VOTE_COMMENT_DETAIL: 'TOGGLE_DOWN_VOTE_COMMENT_DETAIL',
-  CLEAR_VOTE_COMMENT_DETAIL: 'CLEAR_VOTE_COMMENT_DETAIL',
+  TOGGLE_NEUTRAL_UP_VOTE_COMMENT_DETAIL: 'TOGGLE_NEUTRAL_UP_VOTE_COMMENT_DETAIL',
+  TOGGLE_NEUTRAL_DOWN_VOTE_COMMENT_DETAIL:
+    'TOGGLE_NEUTRAL_DOWN_VOTE_COMMENT_DETAIL',
 };
 
 function receiveThreadDetailActionCreator(threadDetail) {
@@ -92,9 +94,23 @@ function toggleDownVoteCommentDetailActionCreator({ userId, commentId }) {
   };
 }
 
-function clearVoteCommentActionCreator() {
+function toggleNeutralUpVoteCommentDetailActionCreator({ userId, commentId }) {
   return {
-    type: ActionType.CLEAR_VOTE_COMMENT_DETAIL,
+    type: ActionType.TOGGLE_NEUTRAL_UP_VOTE_COMMENT_DETAIL,
+    payload: {
+      userId,
+      commentId,
+    },
+  };
+}
+
+function toggleNeutralDownVoteCommentDetailActionCreator({ userId, commentId }) {
+  return {
+    type: ActionType.TOGGLE_NEUTRAL_DOWN_VOTE_COMMENT_DETAIL,
+    payload: {
+      userId,
+      commentId,
+    },
   };
 }
 
@@ -225,18 +241,6 @@ function asyncToggleUpVoteCommentDetail(commentId) {
   };
 }
 
-function asyncClearVoteCommentDetail(commentId) {
-  return async (dispatch, getState) => {
-    const { authUser, threadDetail } = getState();
-    dispatch(clearVoteCommentActionCreator(authUser.id, commentId));
-    try {
-      await api.toggleNeutralizeVoteComment(threadDetail.id, commentId);
-    } catch (error) {
-      alert(error.message);
-    }
-  };
-}
-
 function asyncToggleDownVoteCommentDetail(commentId) {
   return async (dispatch, getState) => {
     const { authUser, threadDetail } = getState();
@@ -254,6 +258,40 @@ function asyncToggleDownVoteCommentDetail(commentId) {
   };
 }
 
+function asyncToggleNeutralUpVoteCommentDetail(commentId) {
+  return async (dispatch, getState) => {
+    const { authUser, threadDetail } = getState();
+    dispatch(
+      toggleNeutralUpVoteCommentDetailActionCreator({
+        commentId,
+        userId: authUser.id,
+      })
+    );
+    try {
+      await api.toggleNeutralizeVoteComment(threadDetail.id, commentId);
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+}
+
+function asyncToggleNeutralDownVoteCommentDetail(commentId) {
+  return async (dispatch, getState) => {
+    const { authUser, threadDetail } = getState();
+    dispatch(
+      toggleNeutralDownVoteCommentDetailActionCreator({
+        commentId,
+        userId: authUser.id,
+      })
+    );
+    try {
+      await api.toggleNeutralizeVoteComment(threadDetail.id, commentId);
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+}
+
 export {
   ActionType,
   addCommentActionCreator,
@@ -264,7 +302,8 @@ export {
   toggleNeutralDownVoteThreadDetailActionCreator,
   toggleUpVoteCommentDetailActionCreator,
   toggleDownVoteCommentDetailActionCreator,
-  clearVoteCommentActionCreator,
+  toggleNeutralUpVoteCommentDetailActionCreator,
+  toggleNeutralDownVoteCommentDetailActionCreator,
   asyncAddComment,
   asyncReceiveThreadDetail,
   asyncToggleUpVoteThreadDetail,
@@ -272,6 +311,7 @@ export {
   asyncToggleNeutralUpVoteThreadDetail,
   asyncToggleNeutralDownVoteThreadDetail,
   asyncToggleUpVoteCommentDetail,
-  asyncClearVoteCommentDetail,
   asyncToggleDownVoteCommentDetail,
+  asyncToggleNeutralUpVoteCommentDetail,
+  asyncToggleNeutralDownVoteCommentDetail,
 };

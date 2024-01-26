@@ -12,16 +12,46 @@ import { postedAt } from '../utils';
 import ThreadItemFooterButton from './ThreadItemFooterButton';
 
 function ThreadCommentItem({
+  id,
   content,
   createdAt,
   owner,
   upVotesBy,
   downVotesBy,
+  onUpVoteComment,
+  onDownVoteComment,
+  onNeutralizeUpVoteComment,
+  onNeutralizeDownVoteComment,
   authUser,
   isLastItem,
 }) {
-  const hasVotedUp = upVotesBy.includes(authUser);
-  const hasVotedDown = downVotesBy.includes(authUser);
+  const hasVotedUp = upVotesBy.includes(authUser?.id);
+  const hasVotedDown = downVotesBy.includes(authUser?.id);
+
+  const onClickUpVote = (event) => {
+    event.stopPropagation();
+    if (!hasVotedUp && !hasVotedDown) {
+      onUpVoteComment(id);
+    } else if (hasVotedDown) {
+      onNeutralizeDownVoteComment(id);
+      onUpVoteComment(id);
+    } else if (hasVotedUp) {
+      onNeutralizeUpVoteComment(id);
+    }
+  };
+
+  const onClickDownVote = (event) => {
+    event.stopPropagation();
+    if (!hasVotedUp && !hasVotedDown) {
+      onDownVoteComment(id);
+    } else if (hasVotedUp) {
+      onNeutralizeUpVoteComment(id);
+      onDownVoteComment(id);
+    } else if (hasVotedDown) {
+      onNeutralizeDownVoteComment(id);
+    }
+  };
+
   return (
     <Box
       as="section"
@@ -50,16 +80,16 @@ function ThreadCommentItem({
         <ThreadItemFooterButton
           icon={hasVotedUp ? <BiSolidUpvote color="green" /> : <BiUpvote />}
           value={upVotesBy.length}
-          // onClick={
-          //   authUser ? onClickUpVote : () => alert('Please login to upvote')
-          // }
+          onClick={
+            authUser ? onClickUpVote : () => alert('Please login to upvote')
+          }
         />
         <ThreadItemFooterButton
           icon={hasVotedDown ? <BiSolidDownvote color="red" /> : <BiDownvote />}
           value={downVotesBy.length}
-          // onClick={
-          //   authUser ? onClickDownVote : () => alert('Please login to downvote')
-          // }
+          onClick={
+            authUser ? onClickDownVote : () => alert('Please login to downvote')
+          }
         />
       </Box>
     </Box>
