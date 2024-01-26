@@ -9,6 +9,7 @@ import {
 } from 'react-icons/bi';
 import parse from 'html-react-parser';
 import { postedAt } from '../utils';
+import { commentShape, userShape } from '../utils/propShape';
 import ThreadItemFooterButton from './ThreadItemFooterButton';
 
 function ThreadCommentItem({
@@ -96,30 +97,19 @@ function ThreadCommentItem({
   );
 }
 
-const ownerCommentItemShape = {
-  id: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  avatar: PropTypes.string.isRequired,
-};
-
-const threadCommentItemShape = {
-  id: PropTypes.string.isRequired,
-  content: PropTypes.string.isRequired,
-  createdAt: PropTypes.string.isRequired,
-  owner: PropTypes.shape(ownerCommentItemShape).isRequired,
-  upVotesBy: PropTypes.arrayOf(PropTypes.string).isRequired,
-  downVotesBy: PropTypes.arrayOf(PropTypes.string).isRequired,
-};
-
 ThreadCommentItem.propTypes = {
-  ...threadCommentItemShape,
+  ...commentShape,
+  onUpVoteComment: PropTypes.func.isRequired,
+  onDownVoteComment: PropTypes.func.isRequired,
+  onNeutralizeUpVoteComment: PropTypes.func.isRequired,
+  onNeutralizeDownVoteComment: PropTypes.func.isRequired,
+  authUser: PropTypes.shape(userShape),
   isLastItem: PropTypes.bool,
 };
 
 ThreadCommentItem.defaultProps = {
+  authUser: null,
   isLastItem: false,
 };
-
-export { threadCommentItemShape };
 
 export default ThreadCommentItem;

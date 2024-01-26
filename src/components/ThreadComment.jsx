@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import CTAButton from './CTAButton';
 import ThreadCommentItem from './ThreadCommentItem';
+import { detailThreadShape, userShape } from '../utils/propShape';
 
 function ThreadComment({
   threadDetail,
@@ -93,36 +94,9 @@ function ThreadComment({
   );
 }
 
-const userCommentShape = {
-  id: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  avatar: PropTypes.string.isRequired,
-};
-
-const commentItemShape = {
-  id: PropTypes.string,
-  content: PropTypes.string,
-  createdAt: PropTypes.string,
-  owner: PropTypes.shape(userCommentShape),
-  upVotesCommentBy: PropTypes.arrayOf(PropTypes.string),
-  downVotesCommentBy: PropTypes.arrayOf(PropTypes.string),
-};
-
-const detailThreadShape = {
-  id: PropTypes.string,
-  title: PropTypes.string,
-  body: PropTypes.string,
-  category: PropTypes.string,
-  createdAt: PropTypes.string,
-  owner: PropTypes.shape(userCommentShape),
-  upVotesBy: PropTypes.arrayOf(PropTypes.string),
-  downVotesBy: PropTypes.arrayOf(PropTypes.string),
-  comments: PropTypes.arrayOf(PropTypes.shape(commentItemShape)),
-};
-
 ThreadComment.propTypes = {
   threadDetail: PropTypes.shape(detailThreadShape).isRequired,
-  authUser: PropTypes.shape(userCommentShape),
+  authUser: PropTypes.shape(userShape),
   onAddComment: PropTypes.func.isRequired,
   onUpVoteComment: PropTypes.func.isRequired,
   onDownVoteComment: PropTypes.func.isRequired,

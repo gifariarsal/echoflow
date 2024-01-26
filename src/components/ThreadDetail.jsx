@@ -12,6 +12,7 @@ import {
 } from '@chakra-ui/react';
 import { postedAt } from '../utils';
 import ThreadItemFooterButton from './ThreadItemFooterButton';
+import { userShape, detailThreadShape } from '../utils/propShape';
 
 function ThreadDetail({
   id,
@@ -109,21 +110,8 @@ function ThreadDetail({
   );
 }
 
-const userShape = {
-  id: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  avatar: PropTypes.string.isRequired,
-};
-
 ThreadDetail.propTypes = {
-  id: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
-  body: PropTypes.string.isRequired,
-  category: PropTypes.string.isRequired,
-  createdAt: PropTypes.string.isRequired,
-  owner: PropTypes.shape(userShape).isRequired,
-  upVotesBy: PropTypes.arrayOf(PropTypes.string).isRequired,
-  downVotesBy: PropTypes.arrayOf(PropTypes.string).isRequired,
+  ...detailThreadShape,
   authUser: PropTypes.shape(userShape),
   onUpVoteThreadDetail: PropTypes.func,
   onDownVoteThreadDetail: PropTypes.func,
@@ -138,7 +126,5 @@ ThreadDetail.defaultProps = {
   onNeutralizeUpVoteThreadDetail: null,
   onNeutralizeDownVoteThreadDetail: null,
 };
-
-export { userShape };
 
 export default ThreadDetail;
