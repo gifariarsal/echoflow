@@ -12,10 +12,6 @@ function ThreadComment({
   threadDetail,
   authUser,
   onAddComment,
-  onUpVoteComment,
-  onDownVoteComment,
-  onNeutralizeUpVoteComment,
-  onNeutralizeDownVoteComment,
 }) {
   const MAX_CONTENT_LENGTH = 300;
   const [content, setContent] = React.useState('');
@@ -78,10 +74,6 @@ function ThreadComment({
             <ThreadCommentItem
               key={comment.id}
               {...comment}
-              onUpVoteComment={onUpVoteComment}
-              onDownVoteComment={onDownVoteComment}
-              onNeutralizeUpVoteComment={onNeutralizeUpVoteComment}
-              onNeutralizeDownVoteComment={onNeutralizeDownVoteComment}
               authUser={authUser}
               isLastItem={index === comments.length - 1}
             />
@@ -98,10 +90,6 @@ ThreadComment.propTypes = {
   threadDetail: PropTypes.shape(detailThreadShape).isRequired,
   authUser: PropTypes.shape(userShape),
   onAddComment: PropTypes.func.isRequired,
-  onUpVoteComment: PropTypes.func.isRequired,
-  onDownVoteComment: PropTypes.func.isRequired,
-  onNeutralizeUpVoteComment: PropTypes.func.isRequired,
-  onNeutralizeDownVoteComment: PropTypes.func.isRequired,
 };
 
 ThreadComment.defaultProps = {

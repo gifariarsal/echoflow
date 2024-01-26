@@ -5,14 +5,6 @@ import { Box } from '@chakra-ui/react';
 import {
   asyncAddComment,
   asyncReceiveThreadDetail,
-  asyncToggleDownVoteThreadDetail,
-  asyncToggleNeutralDownVoteThreadDetail,
-  asyncToggleNeutralUpVoteThreadDetail,
-  asyncToggleUpVoteThreadDetail,
-  asyncToggleUpVoteCommentDetail,
-  asyncToggleDownVoteCommentDetail,
-  asyncToggleNeutralUpVoteCommentDetail,
-  asyncToggleNeutralDownVoteCommentDetail,
 } from '../redux/threadDetail/action';
 import ThreadDetail from '../components/ThreadDetail';
 import ThreadComment from '../components/ThreadComment';
@@ -29,38 +21,6 @@ function ThreadDetailPage() {
 
   const onAddComment = (content) => {
     dispatch(asyncAddComment({ content, commentTo: id }));
-  };
-
-  const onUpVoteThreadDetail = (threadId) => {
-    dispatch(asyncToggleUpVoteThreadDetail(threadId));
-  };
-
-  const onDownVoteThreadDetail = (threadId) => {
-    dispatch(asyncToggleDownVoteThreadDetail(threadId));
-  };
-
-  const onNeutralizeUpVoteThreadDetail = (threadId) => {
-    dispatch(asyncToggleNeutralUpVoteThreadDetail(threadId));
-  };
-
-  const onNeutralizeDownVoteThreadDetail = (threadId) => {
-    dispatch(asyncToggleNeutralDownVoteThreadDetail(threadId));
-  };
-
-  const onUpVoteComment = (commentId) => {
-    dispatch(asyncToggleUpVoteCommentDetail(commentId));
-  };
-
-  const onDownVoteComment = (commentId) => {
-    dispatch(asyncToggleDownVoteCommentDetail(commentId));
-  };
-
-  const onNeutralizeUpVoteComment = (commentId) => {
-    dispatch(asyncToggleNeutralUpVoteCommentDetail(commentId));
-  };
-
-  const onNeutralizeDownVoteComment = (commentId) => {
-    dispatch(asyncToggleNeutralDownVoteCommentDetail(commentId));
   };
 
   if (!threadDetail) {
@@ -80,19 +40,11 @@ function ThreadDetailPage() {
         <ThreadDetail
           {...threadDetail}
           authUser={authUser}
-          onUpVoteThreadDetail={onUpVoteThreadDetail}
-          onDownVoteThreadDetail={onDownVoteThreadDetail}
-          onNeutralizeUpVoteThreadDetail={onNeutralizeUpVoteThreadDetail}
-          onNeutralizeDownVoteThreadDetail={onNeutralizeDownVoteThreadDetail}
         />
         <ThreadComment
           threadDetail={threadDetail}
           authUser={authUser}
           onAddComment={onAddComment}
-          onUpVoteComment={onUpVoteComment}
-          onDownVoteComment={onDownVoteComment}
-          onNeutralizeUpVoteComment={onNeutralizeUpVoteComment}
-          onNeutralizeDownVoteComment={onNeutralizeDownVoteComment}
         />
       </Box>
     </Box>

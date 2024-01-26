@@ -4,20 +4,12 @@ import ThreadItem, { threadItemShape } from './ThreadItem';
 
 function ThreadList({
   threads,
-  onUpVoteThread,
-  onDownVoteThread,
-  onNeutralizeUpVoteThread,
-  onNeutralizeDownVoteThread,
 }) {
   return (
     <>
       {threads.map((thread, index) => (
         <ThreadItem
           key={thread.id}
-          onUpVoteThread={onUpVoteThread}
-          onDownVoteThread={onDownVoteThread}
-          onNeutralizeUpVoteThread={onNeutralizeUpVoteThread}
-          onNeutralizeDownVoteThread={onNeutralizeDownVoteThread}
           {...thread}
           isLastItem={index === threads.length - 1}
         />

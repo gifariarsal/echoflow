@@ -9,22 +9,42 @@ import {
 } from 'react-icons/bi';
 import { Box } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import ThreadItemFooterButton from './ThreadItemFooterButton';
+import {
+  asyncToggleDownVoteThread,
+  asyncToggleNeutralDownVoteThread,
+  asyncToggleNeutralUpVoteThread,
+  asyncToggleUpVoteThread,
+} from '../redux/threads/action';
 
 function ThreadItemFooter({
   id,
   totalComments,
   upVotesBy,
   downVotesBy,
-  onUpVoteThread,
-  onDownVoteThread,
-  onNeutralizeUpVoteThread,
-  onNeutralizeDownVoteThread,
   authUser,
 }) {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const hasVotedUp = upVotesBy.includes(authUser);
   const hasVotedDown = downVotesBy.includes(authUser);
+
+  const onUpVoteThread = (threadId) => {
+    dispatch(asyncToggleUpVoteThread(threadId));
+  };
+
+  const onDownVoteThread = (threadId) => {
+    dispatch(asyncToggleDownVoteThread(threadId));
+  };
+
+  const onNeutralizeUpVoteThread = (threadId) => {
+    dispatch(asyncToggleNeutralUpVoteThread(threadId));
+  };
+
+  const onNeutralizeDownVoteThread = (threadId) => {
+    dispatch(asyncToggleNeutralDownVoteThread(threadId));
+  };
 
   const onClickUpVote = (event) => {
     event.stopPropagation();
@@ -86,10 +106,6 @@ ThreadItemFooter.propTypes = {
   totalComments: PropTypes.number.isRequired,
   upVotesBy: PropTypes.arrayOf(PropTypes.string).isRequired,
   downVotesBy: PropTypes.arrayOf(PropTypes.string).isRequired,
-  onUpVoteThread: PropTypes.func.isRequired,
-  onDownVoteThread: PropTypes.func.isRequired,
-  onNeutralizeUpVoteThread: PropTypes.func.isRequired,
-  onNeutralizeDownVoteThread: PropTypes.func.isRequired,
   authUser: PropTypes.string,
 };
 

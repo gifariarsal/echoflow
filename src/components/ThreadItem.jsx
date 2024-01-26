@@ -16,10 +16,6 @@ function ThreadItem({
   upVotesBy,
   downVotesBy,
   totalComments,
-  onUpVoteThread,
-  onDownVoteThread,
-  onNeutralizeUpVoteThread,
-  onNeutralizeDownVoteThread,
   isLastItem,
 }) {
   return (
@@ -46,10 +42,6 @@ function ThreadItem({
           totalComments,
           upVotesBy,
           downVotesBy,
-          onUpVoteThread,
-          onDownVoteThread,
-          onNeutralizeUpVoteThread,
-          onNeutralizeDownVoteThread,
           authUser,
         }}
       />
@@ -77,18 +69,10 @@ const threadItemShape = {
 
 ThreadItem.propTypes = {
   ...threadItemShape,
-  onUpVoteThread: PropTypes.func,
-  onDownVoteThread: PropTypes.func,
-  onNeutralizeUpVoteThread: PropTypes.func,
-  onNeutralizeDownVoteThread: PropTypes.func,
   isLastItem: PropTypes.bool,
 };
 
 ThreadItem.defaultProps = {
-  onUpVoteThread: null,
-  onDownVoteThread: null,
-  onNeutralizeUpVoteThread: null,
-  onNeutralizeDownVoteThread: null,
   isLastItem: false,
 };
 

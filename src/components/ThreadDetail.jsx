@@ -10,9 +10,11 @@ import parse from 'html-react-parser';
 import {
   Avatar, Box, Heading, Text
 } from '@chakra-ui/react';
+import { useDispatch } from 'react-redux';
 import { postedAt } from '../utils';
 import ThreadItemFooterButton from './ThreadItemFooterButton';
 import { userShape, detailThreadShape } from '../utils/propShape';
+import { asyncToggleDownVoteThreadDetail, asyncToggleUpVoteThreadDetail } from '../redux/threadDetail/action';
 
 function ThreadDetail({
   id,
@@ -24,36 +26,27 @@ function ThreadDetail({
   upVotesBy,
   downVotesBy,
   authUser,
-  onUpVoteThreadDetail,
-  onDownVoteThreadDetail,
-  onNeutralizeUpVoteThreadDetail,
-  onNeutralizeDownVoteThreadDetail,
 }) {
+  const dispatch = useDispatch();
   const hasVotedUp = upVotesBy.includes(authUser?.id);
   const hasVotedDown = downVotesBy.includes(authUser?.id);
 
+  const onUpVoteThreadDetail = () => {
+    dispatch(asyncToggleUpVoteThreadDetail());
+  };
+
+  const onDownVoteThreadDetail = () => {
+    dispatch(asyncToggleDownVoteThreadDetail());
+  };
+
   const onClickUpVote = (event) => {
     event.stopPropagation();
-    if (!hasVotedUp && !hasVotedDown) {
-      onUpVoteThreadDetail(id);
-    } else if (hasVotedDown) {
-      onNeutralizeDownVoteThreadDetail(id);
-      onUpVoteThreadDetail(id);
-    } else if (hasVotedUp) {
-      onNeutralizeUpVoteThreadDetail(id);
-    }
+    onUpVoteThreadDetail(id);
   };
 
   const onClickDownVote = (event) => {
     event.stopPropagation();
-    if (!hasVotedUp && !hasVotedDown) {
-      onDownVoteThreadDetail(id);
-    } else if (hasVotedUp) {
-      onNeutralizeUpVoteThreadDetail(id);
-      onDownVoteThreadDetail(id);
-    } else if (hasVotedDown) {
-      onNeutralizeDownVoteThreadDetail(id);
-    }
+    onDownVoteThreadDetail(id);
   };
   return (
     <Box as="section">
@@ -113,18 +106,10 @@ function ThreadDetail({
 ThreadDetail.propTypes = {
   ...detailThreadShape,
   authUser: PropTypes.shape(userShape),
-  onUpVoteThreadDetail: PropTypes.func,
-  onDownVoteThreadDetail: PropTypes.func,
-  onNeutralizeUpVoteThreadDetail: PropTypes.func,
-  onNeutralizeDownVoteThreadDetail: PropTypes.func,
 };
 
 ThreadDetail.defaultProps = {
   authUser: null,
-  onUpVoteThreadDetail: null,
-  onDownVoteThreadDetail: null,
-  onNeutralizeUpVoteThreadDetail: null,
-  onNeutralizeDownVoteThreadDetail: null,
 };
 
 export default ThreadDetail;

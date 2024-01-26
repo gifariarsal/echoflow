@@ -8,9 +8,11 @@ import {
   BiSolidDownvote,
 } from 'react-icons/bi';
 import parse from 'html-react-parser';
+import { useDispatch } from 'react-redux';
 import { postedAt } from '../utils';
 import { commentShape, userShape } from '../utils/propShape';
 import ThreadItemFooterButton from './ThreadItemFooterButton';
+import { asyncToggleDownVoteCommentDetail, asyncToggleUpVoteCommentDetail } from '../redux/threadDetail/action';
 
 function ThreadCommentItem({
   id,
@@ -19,38 +21,29 @@ function ThreadCommentItem({
   owner,
   upVotesBy,
   downVotesBy,
-  onUpVoteComment,
-  onDownVoteComment,
-  onNeutralizeUpVoteComment,
-  onNeutralizeDownVoteComment,
   authUser,
   isLastItem,
 }) {
+  const dispatch = useDispatch();
   const hasVotedUp = upVotesBy.includes(authUser?.id);
   const hasVotedDown = downVotesBy.includes(authUser?.id);
 
+  const onUpVoteComment = (commentId) => {
+    dispatch(asyncToggleUpVoteCommentDetail(commentId));
+  };
+
+  const onDownVoteComment = (commentId) => {
+    dispatch(asyncToggleDownVoteCommentDetail(commentId));
+  };
+
   const onClickUpVote = (event) => {
     event.stopPropagation();
-    if (!hasVotedUp && !hasVotedDown) {
-      onUpVoteComment(id);
-    } else if (hasVotedDown) {
-      onNeutralizeDownVoteComment(id);
-      onUpVoteComment(id);
-    } else if (hasVotedUp) {
-      onNeutralizeUpVoteComment(id);
-    }
+    onUpVoteComment(id);
   };
 
   const onClickDownVote = (event) => {
     event.stopPropagation();
-    if (!hasVotedUp && !hasVotedDown) {
-      onDownVoteComment(id);
-    } else if (hasVotedUp) {
-      onNeutralizeUpVoteComment(id);
-      onDownVoteComment(id);
-    } else if (hasVotedDown) {
-      onNeutralizeDownVoteComment(id);
-    }
+    onDownVoteComment(id);
   };
 
   return (
@@ -76,7 +69,7 @@ function ThreadCommentItem({
           {postedAt(createdAt)}
         </Text>
       </Text>
-      <Text>{parse(content)}</Text>
+      <Box as="article">{parse(content)}</Box>
       <Box display="flex" alignItems="center" gap={4} mt={2}>
         <ThreadItemFooterButton
           icon={hasVotedUp ? <BiSolidUpvote color="green" /> : <BiUpvote />}
@@ -99,10 +92,6 @@ function ThreadCommentItem({
 
 ThreadCommentItem.propTypes = {
   ...commentShape,
-  onUpVoteComment: PropTypes.func.isRequired,
-  onDownVoteComment: PropTypes.func.isRequired,
-  onNeutralizeUpVoteComment: PropTypes.func.isRequired,
-  onNeutralizeDownVoteComment: PropTypes.func.isRequired,
   authUser: PropTypes.shape(userShape),
   isLastItem: PropTypes.bool,
 };

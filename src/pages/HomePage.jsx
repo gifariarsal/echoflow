@@ -6,12 +6,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { IoAddOutline } from 'react-icons/io5';
 import { asyncPopulateUsersAndThreads } from '../redux/shared/action';
-import {
-  asyncToggleUpVoteThread,
-  asyncToggleDownVoteThread,
-  asyncToggleNeutralUpVoteThread,
-  asyncToggleNeutralDownVoteThread,
-} from '../redux/threads/action';
 import useInput from '../hooks/useInput';
 import ThreadCategoryList from '../components/ThreadCategoryList';
 import ThreadList from '../components/ThreadList';
@@ -28,22 +22,6 @@ function HomePage() {
   useEffect(() => {
     dispatch(asyncPopulateUsersAndThreads());
   }, [dispatch]);
-
-  const onUpVoteThread = (id) => {
-    dispatch(asyncToggleUpVoteThread(id));
-  };
-
-  const onDownVoteThread = (id) => {
-    dispatch(asyncToggleDownVoteThread(id));
-  };
-
-  const onNeutralizeUpVoteThread = (id) => {
-    dispatch(asyncToggleNeutralUpVoteThread(id));
-  };
-
-  const onNeutralizeDownVoteThread = (id) => {
-    dispatch(asyncToggleNeutralDownVoteThread(id));
-  };
 
   const threadList = threads.map((thread) => ({
     ...thread,
@@ -80,10 +58,6 @@ function HomePage() {
         </Heading>
         <ThreadList
           threads={category ? threadCategory : threadList}
-          onUpVoteThread={onUpVoteThread}
-          onDownVoteThread={onDownVoteThread}
-          onNeutralizeUpVoteThread={onNeutralizeUpVoteThread}
-          onNeutralizeDownVoteThread={onNeutralizeDownVoteThread}
         />
       </Box>
       {authUser && (
