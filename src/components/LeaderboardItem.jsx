@@ -1,6 +1,7 @@
 import { Avatar, Box, Text } from '@chakra-ui/react';
 import React from 'react';
 import PropTypes from 'prop-types';
+import { userShape } from '../utils/propShape';
 
 function LeaderboardItem({ user, score }) {
   return (
@@ -20,21 +21,9 @@ function LeaderboardItem({ user, score }) {
   );
 }
 
-const userLeaderboardItemShape = {
-  id: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  avatar: PropTypes.string.isRequired,
-};
-
-const leaderboardItemShape = {
-  user: PropTypes.shape(userLeaderboardItemShape).isRequired,
+LeaderboardItem.propTypes = {
+  user: PropTypes.shape(userShape).isRequired,
   score: PropTypes.number.isRequired,
 };
-
-LeaderboardItem.propTypes = {
-  ...leaderboardItemShape,
-};
-
-export { leaderboardItemShape };
 
 export default LeaderboardItem;

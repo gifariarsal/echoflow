@@ -1,7 +1,8 @@
 import { Box, Text } from '@chakra-ui/react';
 import React from 'react';
 import PropTypes from 'prop-types';
-import LeaderboardItem, { leaderboardItemShape } from './LeaderboardItem';
+import LeaderboardItem from './LeaderboardItem';
+import { leaderboardItemShape } from '../utils/propShape';
 
 function LeaderboardList({ leaderboards }) {
   return (

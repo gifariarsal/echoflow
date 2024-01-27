@@ -10,6 +10,7 @@ import {
   IoHomeOutline,
 } from 'react-icons/io5';
 import PropTypes from 'prop-types';
+import { userShape } from '../utils/propShape';
 
 function Navbar({ authUser, onLogOut }) {
   return (
@@ -83,14 +84,8 @@ function Navbar({ authUser, onLogOut }) {
   );
 }
 
-const authUserShape = {
-  id: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  email: PropTypes.string.isRequired,
-};
-
 Navbar.propTypes = {
-  authUser: PropTypes.shape(authUserShape),
+  authUser: PropTypes.shape(userShape),
   onLogOut: PropTypes.func,
 };
 

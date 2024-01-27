@@ -4,6 +4,7 @@ import parse from 'html-react-parser';
 import { Box } from '@chakra-ui/react';
 import ThreadItemHeader from './ThreadItemHeader';
 import ThreadItemFooter from './ThreadItemFooter';
+import { userShape, detailThreadShape } from '../utils/propShape';
 
 function ThreadItem({
   id,
@@ -49,21 +50,9 @@ function ThreadItem({
   );
 }
 
-const userShape = {
-  id: PropTypes.string,
-  name: PropTypes.string,
-  avatar: PropTypes.string,
-  email: PropTypes.string,
-};
-
 const threadItemShape = {
-  id: PropTypes.string.isRequired,
-  body: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
-  category: PropTypes.string.isRequired,
+  ...detailThreadShape,
   user: PropTypes.shape(userShape).isRequired,
-  upVotesBy: PropTypes.arrayOf(PropTypes.string).isRequired,
-  downVotesBy: PropTypes.arrayOf(PropTypes.string).isRequired,
   authUser: PropTypes.string
 };
 
@@ -75,7 +64,5 @@ ThreadItem.propTypes = {
 ThreadItem.defaultProps = {
   isLastItem: false,
 };
-
-export { threadItemShape };
 
 export default ThreadItem;

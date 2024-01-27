@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ThreadItem, { threadItemShape } from './ThreadItem';
+import ThreadItem from './ThreadItem';
+import { detailThreadShape } from '../utils/propShape';
 
 function ThreadList({
   threads,
@@ -19,18 +20,7 @@ function ThreadList({
 }
 
 ThreadList.propTypes = {
-  onUpVoteThread: PropTypes.func,
-  onDownVoteThread: PropTypes.func,
-  onNeutralizeUpVoteThread: PropTypes.func,
-  onNeutralizeDownVoteThread: PropTypes.func,
-  threads: PropTypes.arrayOf(PropTypes.shape(threadItemShape)).isRequired,
-};
-
-ThreadList.defaultProps = {
-  onUpVoteThread: null,
-  onDownVoteThread: null,
-  onNeutralizeUpVoteThread: null,
-  onNeutralizeDownVoteThread: null,
+  threads: PropTypes.arrayOf(PropTypes.shape(detailThreadShape)).isRequired,
 };
 
 export default ThreadList;
