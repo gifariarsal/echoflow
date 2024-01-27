@@ -1,5 +1,11 @@
 import {
-  Avatar, Box, Button, Flex, Image, Text
+  Avatar,
+  Box,
+  Button,
+  Flex,
+  Image,
+  Text,
+  useMediaQuery,
 } from '@chakra-ui/react';
 import React from 'react';
 import { Link } from 'react-router-dom';
@@ -13,6 +19,7 @@ import PropTypes from 'prop-types';
 import { userShape } from '../utils/propShape';
 
 function Navbar({ authUser, onLogOut }) {
+  const [isMobile] = useMediaQuery('(max-width: 768px)');
   return (
     <header>
       <Flex
@@ -30,23 +37,37 @@ function Navbar({ authUser, onLogOut }) {
         px={{ base: 4, md: 8 }}
       >
         <Box display="flex" alignItems="center" gap={2}>
+          <Box display={isMobile ? 'none' : 'block'}>
+            <Link to="/">
+              <Image
+                src="/echoflow_logo.png"
+                alt="logo"
+                h="28px"
+                _hover={{ filter: 'brightness(70%)', transition: '300ms' }}
+              />
+            </Link>
+          </Box>
+          <Link to="/">
+            <Button variant="ghost" gap={2}>
+              <IoHomeOutline />
+              {isMobile ? '' : 'Home'}
+            </Button>
+          </Link>
+          <Link to="/leaderboards">
+            <Button variant="ghost" gap={2}>
+              <IoBarChartOutline />
+              {isMobile ? '' : 'Leaderboards'}
+            </Button>
+          </Link>
+        </Box>
+        <Box display={isMobile ? 'block' : 'none'}>
           <Link to="/">
             <Image
-              src="/echoflow_logo.png"
+              src="/echoflow_icon.png"
               alt="logo"
               h="28px"
               _hover={{ filter: 'brightness(70%)', transition: '300ms' }}
             />
-          </Link>
-          <Link to="/">
-            <Button variant="ghost" leftIcon={<IoHomeOutline />}>
-              Home
-            </Button>
-          </Link>
-          <Link to="/leaderboards">
-            <Button variant="ghost" leftIcon={<IoBarChartOutline />}>
-              Leaderboards
-            </Button>
           </Link>
         </Box>
         {authUser ? (
@@ -54,27 +75,28 @@ function Navbar({ authUser, onLogOut }) {
             <Avatar name={authUser?.name} src={authUser?.avatar} size="sm" />
             <Text>
               Hi,
-              {' '}
               {authUser?.name}
             </Text>
             <Button
+              gap={2}
               onClick={onLogOut}
               variant="ghost"
-              leftIcon={<IoLogOutOutline />}
               colorScheme="red"
             >
-              Logout
+              <IoLogOutOutline />
+              {isMobile ? '' : 'Logout'}
             </Button>
           </Box>
         ) : (
           <Link to="/login">
             <Button
+              gap={2}
               color="white"
               bg="brand.main"
-              leftIcon={<IoLogInOutline />}
               _hover={{ bg: 'brand.hover' }}
               _active={{ bg: 'brand.active' }}
             >
+              <IoLogInOutline />
               Login
             </Button>
           </Link>

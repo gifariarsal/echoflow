@@ -17,18 +17,29 @@ function RegisterPage() {
   };
   return (
     <Box w="full" minH="100vh" bg="bg.primary" p={4}>
-      <Box w="full" minH="100vh" rounded="xl" bg="bg.secondary" display="flex">
+      <Box
+        w="full"
+        minH={{ md: '100vh' }}
+        rounded="xl"
+        bg="bg.secondary"
+        display="flex"
+      >
         <Box
           w="40%"
-          display="flex"
+          display={{ base: 'none', md: 'flex' }}
           rounded="xl"
           justifyContent="center"
           alignItems="center"
         >
-          <Image src="/register.png" alt="login" w="50%" />
+          <Image src="/register.png" alt="login" w={{ md: '80%', lg: '50%' }} />
         </Box>
-        <Box w="60%">
-          <Box display="flex" justifyContent="flex-end" gap={2} p="20px 40px">
+        <Box w={{ base: 'full', md: '60%' }}>
+          <Box
+            display="flex"
+            justifyContent="flex-end"
+            gap={2}
+            p={{ base: '10px 20px', md: '20px 40px' }}
+          >
             <Text>Already have an account?</Text>
             <Button
               as="a"
@@ -41,7 +52,11 @@ function RegisterPage() {
               Login
             </Button>
           </Box>
-          <VStack spacing="4" p="20px 200px">
+          <VStack
+            spacing="4"
+            py="20px"
+            px={{ base: '40px', md: '60px', lg: '140px' }}
+          >
             <Text
               w="100%"
               fontSize="xx-large"
