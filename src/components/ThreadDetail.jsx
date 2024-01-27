@@ -14,7 +14,11 @@ import { useDispatch } from 'react-redux';
 import { postedAt } from '../utils';
 import ThreadItemFooterButton from './ThreadItemFooterButton';
 import { userShape, detailThreadShape } from '../utils/propShape';
-import { asyncToggleDownVoteThreadDetail, asyncToggleUpVoteThreadDetail } from '../redux/threadDetail/action';
+import {
+  asyncClearVoteThreadDetail,
+  asyncToggleDownVoteThreadDetail,
+  asyncToggleUpVoteThreadDetail,
+} from '../redux/threadDetail/action';
 
 function ThreadDetail({
   id,
@@ -39,15 +43,34 @@ function ThreadDetail({
     dispatch(asyncToggleDownVoteThreadDetail());
   };
 
+  const onNeutralizeVoteThreadDetail = () => {
+    dispatch(asyncClearVoteThreadDetail());
+  };
+
   const onClickUpVote = (event) => {
     event.stopPropagation();
-    onUpVoteThreadDetail(id);
+    if (hasVotedUp) {
+      onNeutralizeVoteThreadDetail(id);
+    } else {
+      if (hasVotedDown) {
+        onNeutralizeVoteThreadDetail(id);
+      }
+      onUpVoteThreadDetail(id);
+    }
   };
 
   const onClickDownVote = (event) => {
     event.stopPropagation();
-    onDownVoteThreadDetail(id);
+    if (hasVotedDown) {
+      onNeutralizeVoteThreadDetail(id);
+    } else {
+      if (hasVotedUp) {
+        onNeutralizeVoteThreadDetail(id);
+      }
+      onDownVoteThreadDetail(id);
+    }
   };
+
   return (
     <Box as="section">
       <Box pb={2} borderBottom="1px solid" borderColor="silver">
