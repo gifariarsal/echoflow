@@ -24,7 +24,6 @@ function Navbar({ authUser, onLogOut }) {
     <header>
       <Flex
         w="full"
-        zIndex={10}
         bg="white"
         color="#1c1c1c"
         h="60px"
@@ -37,16 +36,15 @@ function Navbar({ authUser, onLogOut }) {
         px={{ base: 4, md: 8 }}
       >
         <Box display="flex" alignItems="center" gap={4}>
-          <Box display={isMobile ? 'none' : 'block'}>
-            <Link to="/">
-              <Image
-                src="/echoflow_logo.png"
-                alt="logo"
-                h="28px"
-                _hover={{ filter: 'brightness(70%)', transition: '300ms' }}
-              />
-            </Link>
-          </Box>
+          <Link to="/">
+            <Image
+              src="/echoflow_logo.png"
+              alt="logo"
+              mr={isMobile ? 2 : 0}
+              h={{ base: '20px', md: '28px' }}
+              _hover={{ filter: 'brightness(70%)', transition: '300ms' }}
+            />
+          </Link>
           <Link to="/">
             <Button
               variant="ghost"
@@ -72,19 +70,13 @@ function Navbar({ authUser, onLogOut }) {
             </Button>
           </Link>
         </Box>
-        <Box display={isMobile ? 'block' : 'none'}>
-          <Link to="/">
-            <Image
-              src="/echoflow_icon.png"
-              alt="logo"
-              h="28px"
-              _hover={{ filter: 'brightness(70%)', transition: '300ms' }}
-            />
-          </Link>
-        </Box>
         {authUser ? (
           <Box display="flex" alignItems="center" gap={2}>
-            <Avatar name={authUser?.name} src={authUser?.avatar} size="sm" />
+            <Avatar
+              name={authUser?.name}
+              src={authUser?.avatar}
+              size={{ base: 'xs', md: 'sm' }}
+            />
             <Text>
               Hi,
               {' '}
