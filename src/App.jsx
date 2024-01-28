@@ -11,7 +11,8 @@ import {
   RegisterPage,
   ThreadDetailPage,
 } from './pages';
-import { Navbar, Loading } from './components';
+import Navbar from './components/common/Navbar';
+import Loading from './components/common/Loading';
 
 function App() {
   const navigate = useNavigate();

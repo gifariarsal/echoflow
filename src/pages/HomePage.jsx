@@ -6,7 +6,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { IoAddOutline } from 'react-icons/io5';
 import { asyncPopulateUsersAndThreads } from '../redux/shared/action';
-import { ThreadCategoryList, ThreadList } from '../components';
+import ThreadCategoryList from '../components/thread/ThreadCategoryList';
+import ThreadList from '../components/thread/ThreadList';
 
 function HomePage() {
   const dispatch = useDispatch();

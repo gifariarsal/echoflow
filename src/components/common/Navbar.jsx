@@ -32,7 +32,6 @@ function Navbar({ authUser, onLogOut }) {
         borderColor="#F6B3CF"
         align="center"
         justifyContent="space-between"
-        cursor="pointer"
         px={{ base: 4, md: 8 }}
       >
         <Box display="flex" alignItems="center" gap={4}>

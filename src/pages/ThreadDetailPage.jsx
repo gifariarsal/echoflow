@@ -6,7 +6,8 @@ import {
   asyncAddComment,
   asyncReceiveThreadDetail,
 } from '../redux/threadDetail/action';
-import { ThreadDetail, ThreadComment } from '../components';
+import ThreadDetail from '../components/thread/ThreadDetail';
+import ThreadComment from '../components/thread/ThreadComment';
 
 function ThreadDetailPage() {
   const { id } = useParams();

@@ -5,7 +5,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { asyncSetAuthUser } from '../redux/authUser/action';
-import { LoginInput } from '../components';
+import LoginInput from '../components/auth/LoginInput';
 
 function LoginPage() {
   const navigate = useNavigate();
