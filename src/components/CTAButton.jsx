@@ -6,6 +6,7 @@ function CTAButton({ action, onClick }) {
   return (
     <Button
       type="button"
+      title={action}
       display="flex"
       justifyContent="center"
       w="100%"

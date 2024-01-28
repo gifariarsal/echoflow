@@ -36,7 +36,7 @@ function Navbar({ authUser, onLogOut }) {
         cursor="pointer"
         px={{ base: 4, md: 8 }}
       >
-        <Box display="flex" alignItems="center" gap={2}>
+        <Box display="flex" alignItems="center" gap={4}>
           <Box display={isMobile ? 'none' : 'block'}>
             <Link to="/">
               <Image
@@ -48,13 +48,25 @@ function Navbar({ authUser, onLogOut }) {
             </Link>
           </Box>
           <Link to="/">
-            <Button variant="ghost" gap={2}>
+            <Button
+              variant="ghost"
+              title="Home"
+              rounded={isMobile ? 'full' : 'md'}
+              gap={2}
+              p={isMobile ? 0 : 2}
+            >
               <IoHomeOutline />
               {isMobile ? '' : 'Home'}
             </Button>
           </Link>
           <Link to="/leaderboards">
-            <Button variant="ghost" gap={2}>
+            <Button
+              variant="ghost"
+              title="Leaderboards"
+              rounded={isMobile ? 'full' : 'md'}
+              gap={2}
+              p={isMobile ? 0 : 2}
+            >
               <IoBarChartOutline />
               {isMobile ? '' : 'Leaderboards'}
             </Button>
@@ -79,8 +91,11 @@ function Navbar({ authUser, onLogOut }) {
             </Text>
             <Button
               gap={2}
+              p={isMobile ? 0 : 2}
               onClick={onLogOut}
+              title="Logout"
               variant="ghost"
+              rounded={isMobile ? 'full' : 'md'}
               colorScheme="red"
             >
               <IoLogOutOutline />
@@ -91,6 +106,7 @@ function Navbar({ authUser, onLogOut }) {
           <Link to="/login">
             <Button
               gap={2}
+              p={2}
               color="white"
               bg="brand.main"
               _hover={{ bg: 'brand.hover' }}

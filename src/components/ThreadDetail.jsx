@@ -103,6 +103,7 @@ function ThreadDetail({
           <Box display="flex" alignItems="center" gap={4} my={2}>
             <ThreadItemFooterButton
               icon={hasVotedUp ? <BiSolidUpvote color="green" /> : <BiUpvote />}
+              title="Upvote"
               value={upVotesBy.length}
               onClick={
                 authUser ? onClickUpVote : () => alert('Please login to upvote')
@@ -112,6 +113,7 @@ function ThreadDetail({
               icon={
                 hasVotedDown ? <BiSolidDownvote color="red" /> : <BiDownvote />
               }
+              title="Downvote"
               value={downVotesBy.length}
               onClick={
                 authUser

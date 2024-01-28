@@ -73,6 +73,7 @@ function ThreadCommentItem({
       <Box display="flex" alignItems="center" gap={4} mt={2}>
         <ThreadItemFooterButton
           icon={hasVotedUp ? <BiSolidUpvote color="green" /> : <BiUpvote />}
+          title="Upvote"
           value={upVotesBy.length}
           onClick={
             authUser ? onClickUpVote : () => alert('Please login to upvote')
@@ -80,6 +81,7 @@ function ThreadCommentItem({
         />
         <ThreadItemFooterButton
           icon={hasVotedDown ? <BiSolidDownvote color="red" /> : <BiDownvote />}
+          title="Downvote"
           value={downVotesBy.length}
           onClick={
             authUser ? onClickDownVote : () => alert('Please login to downvote')

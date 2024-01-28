@@ -79,6 +79,7 @@ function ThreadItemFooter({
       <Box display="flex" alignItems="center" gap={4} mb={2}>
         <ThreadItemFooterButton
           icon={hasVotedUp ? <BiSolidUpvote color="green" /> : <BiUpvote />}
+          title="Upvote"
           value={upVotesBy.length}
           onClick={
             authUser ? onClickUpVote : () => alert('Please login to upvote')
@@ -86,6 +87,7 @@ function ThreadItemFooter({
         />
         <ThreadItemFooterButton
           icon={hasVotedDown ? <BiSolidDownvote color="red" /> : <BiDownvote />}
+          title="Downvote"
           value={downVotesBy.length}
           onClick={
             authUser ? onClickDownVote : () => alert('Please login to downvote')
@@ -93,6 +95,7 @@ function ThreadItemFooter({
         />
         <ThreadItemFooterButton
           icon={<BiCommentDetail />}
+          title="Comments"
           value={totalComments}
           onClick={onClickComments}
         />

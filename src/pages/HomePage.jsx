@@ -63,6 +63,7 @@ function HomePage() {
       {authUser && (
         <IconButton
           pos="fixed"
+          title="Add Thread"
           bottom={8}
           right={8}
           onClick={addThread}
