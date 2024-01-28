@@ -46,7 +46,7 @@ function LoginInput({ onLogin }) {
             onChange={onPasswordChange}
           />
           <InputRightElement width="3.5rem">
-            <Button h="1.75rem" size="sm" onClick={handleClick}>
+            <Button h="1.75rem" size="sm" title="Show/Hide Password" onClick={handleClick}>
               {show ? (
                 <IoEyeOffOutline size="20px" />
               ) : (

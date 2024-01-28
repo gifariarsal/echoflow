@@ -107,6 +107,7 @@ function Navbar({ authUser, onLogOut }) {
             <Button
               gap={2}
               p={2}
+              title="Login"
               color="white"
               bg="brand.main"
               _hover={{ bg: 'brand.hover' }}
