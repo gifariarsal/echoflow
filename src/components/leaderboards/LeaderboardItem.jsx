@@ -1,7 +1,7 @@
 import { Avatar, Box, Text } from '@chakra-ui/react';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { userShape } from '../utils/propShape';
+import { userShape } from '../../utils/propShape';
 
 function LeaderboardItem({ user, score }) {
   return (
@@ -13,7 +13,11 @@ function LeaderboardItem({ user, score }) {
       mb={4}
     >
       <Box display="flex" alignItems="center" gap={2}>
-        <Avatar src={user.avatar} name={user.name} size={{ base: 'sm', md: 'md' }} />
+        <Avatar
+          src={user.avatar}
+          name={user.name}
+          size={{ base: 'sm', md: 'md' }}
+        />
         <Text>{user.name}</Text>
       </Box>
       <Text>{score}</Text>

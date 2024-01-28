@@ -5,7 +5,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { asyncRegisterUser } from '../redux/users/action';
-import RegisterInput from '../components/RegisterInput';
+import { RegisterInput } from '../components';
 
 function RegisterPage() {
   const navigate = useNavigate();

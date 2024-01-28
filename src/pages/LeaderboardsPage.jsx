@@ -2,7 +2,7 @@ import { Box, Heading } from '@chakra-ui/react';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { asyncPopulateLeaderboards } from '../redux/shared/action';
-import LeaderboardList from '../components/LeaderboardList';
+import { LeaderboardList } from '../components';
 
 function LeaderboardsPage() {
   const leaderboards = useSelector((states) => states.leaderboards);

@@ -9,10 +9,13 @@ import {
 } from 'react-icons/bi';
 import parse from 'html-react-parser';
 import { useDispatch } from 'react-redux';
-import { postedAt } from '../utils';
-import { commentShape, userShape } from '../utils/propShape';
+import { postedAt } from '../../utils';
+import { commentShape, userShape } from '../../utils/propShape';
 import ThreadItemFooterButton from './ThreadItemFooterButton';
-import { asyncToggleDownVoteCommentDetail, asyncToggleUpVoteCommentDetail } from '../redux/threadDetail/action';
+import {
+  asyncToggleDownVoteCommentDetail,
+  asyncToggleUpVoteCommentDetail,
+} from '../../redux/threadDetail/action';
 
 function ThreadCommentItem({
   id,

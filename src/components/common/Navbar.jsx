@@ -16,7 +16,7 @@ import {
   IoHomeOutline,
 } from 'react-icons/io5';
 import PropTypes from 'prop-types';
-import { userShape } from '../utils/propShape';
+import { userShape } from '../../utils/propShape';
 
 function Navbar({ authUser, onLogOut }) {
   const [isMobile] = useMediaQuery('(max-width: 768px)');
@@ -87,6 +87,7 @@ function Navbar({ authUser, onLogOut }) {
             <Avatar name={authUser?.name} src={authUser?.avatar} size="sm" />
             <Text>
               Hi,
+              {' '}
               {authUser?.name}
             </Text>
             <Button

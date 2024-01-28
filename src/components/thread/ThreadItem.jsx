@@ -4,7 +4,7 @@ import parse from 'html-react-parser';
 import { Box } from '@chakra-ui/react';
 import ThreadItemHeader from './ThreadItemHeader';
 import ThreadItemFooter from './ThreadItemFooter';
-import { userShape, detailThreadShape } from '../utils/propShape';
+import { userShape, detailThreadShape } from '../../utils/propShape';
 
 function ThreadItem({
   id,
@@ -53,7 +53,7 @@ function ThreadItem({
 const threadItemShape = {
   ...detailThreadShape,
   user: PropTypes.shape(userShape).isRequired,
-  authUser: PropTypes.string
+  authUser: PropTypes.string,
 };
 
 ThreadItem.propTypes = {

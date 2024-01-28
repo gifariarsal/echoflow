@@ -6,8 +6,7 @@ import {
   asyncAddComment,
   asyncReceiveThreadDetail,
 } from '../redux/threadDetail/action';
-import ThreadDetail from '../components/ThreadDetail';
-import ThreadComment from '../components/ThreadComment';
+import { ThreadDetail, ThreadComment } from '../components';
 
 function ThreadDetailPage() {
   const { id } = useParams();
@@ -37,10 +36,7 @@ function ThreadDetailPage() {
         minH="100vh"
         rounded="xl"
       >
-        <ThreadDetail
-          {...threadDetail}
-          authUser={authUser}
-        />
+        <ThreadDetail {...threadDetail} authUser={authUser} />
         <ThreadComment
           threadDetail={threadDetail}
           authUser={authUser}

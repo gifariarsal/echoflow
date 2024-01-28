@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import { asyncPopulateUsersAndThreads } from '../redux/shared/action';
+import { asyncPopulateUsersAndThreads } from '../../redux/shared/action';
 import ThreadCategoryItem from './ThreadCategoryItem';
 
 function ThreadCategoryList({ onCategoryChange }) {

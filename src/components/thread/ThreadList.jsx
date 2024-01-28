@@ -1,11 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ThreadItem from './ThreadItem';
-import { detailThreadShape } from '../utils/propShape';
+import { detailThreadShape } from '../../utils/propShape';
 
-function ThreadList({
-  threads,
-}) {
+function ThreadList({ threads }) {
   return (
     <>
       {threads.map((thread, index) => (

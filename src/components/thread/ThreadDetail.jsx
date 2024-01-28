@@ -11,14 +11,14 @@ import {
   Avatar, Box, Heading, Text
 } from '@chakra-ui/react';
 import { useDispatch } from 'react-redux';
-import { postedAt } from '../utils';
+import { postedAt } from '../../utils';
 import ThreadItemFooterButton from './ThreadItemFooterButton';
-import { userShape, detailThreadShape } from '../utils/propShape';
+import { userShape, detailThreadShape } from '../../utils/propShape';
 import {
   asyncClearVoteThreadDetail,
   asyncToggleDownVoteThreadDetail,
   asyncToggleUpVoteThreadDetail,
-} from '../redux/threadDetail/action';
+} from '../../redux/threadDetail/action';
 
 function ThreadDetail({
   id,

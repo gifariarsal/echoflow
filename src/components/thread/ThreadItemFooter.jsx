@@ -16,7 +16,7 @@ import {
   asyncToggleNeutralDownVoteThread,
   asyncToggleNeutralUpVoteThread,
   asyncToggleUpVoteThread,
-} from '../redux/threads/action';
+} from '../../redux/threads/action';
 
 function ThreadItemFooter({
   id,

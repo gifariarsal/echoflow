@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Heading, Text } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
-import { postedAt } from '../utils';
+import { postedAt } from '../../utils';
 
 function ThreadItemHeader({
   id, category, title, user, createdAt

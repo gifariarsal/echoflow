@@ -4,15 +4,11 @@ import {
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import CTAButton from './CTAButton';
+import CTAButton from '../common/CTAButton';
 import ThreadCommentItem from './ThreadCommentItem';
-import { detailThreadShape, userShape } from '../utils/propShape';
+import { detailThreadShape, userShape } from '../../utils/propShape';
 
-function ThreadComment({
-  threadDetail,
-  authUser,
-  onAddComment,
-}) {
+function ThreadComment({ threadDetail, authUser, onAddComment }) {
   const MAX_CONTENT_LENGTH = 300;
   const [content, setContent] = React.useState('');
   const { comments } = threadDetail;

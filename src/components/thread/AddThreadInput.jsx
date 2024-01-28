@@ -1,13 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
-  FormControl,
-  FormLabel,
-  Input,
-  Textarea,
+  FormControl, FormLabel, Input, Textarea
 } from '@chakra-ui/react';
-import useInput from '../hooks/useInput';
-import CTAButton from './CTAButton';
+import useInput from '../../hooks/useInput';
+import CTAButton from '../common/CTAButton';
 
 function AddThreadInput({ addThread }) {
   const [title, onTitleChange] = useInput('');
@@ -46,12 +43,7 @@ function AddThreadInput({ addThread }) {
       </FormControl>
       <FormControl isRequired mt="4" mb="2">
         <FormLabel htmlFor="body">Content</FormLabel>
-        <Textarea
-          id="body"
-          rounded="lg"
-          value={body}
-          onChange={onBodyChange}
-        />
+        <Textarea id="body" rounded="lg" value={body} onChange={onBodyChange} />
       </FormControl>
       <CTAButton action="Add Thread" onClick={addThreadHandler} />
     </form>

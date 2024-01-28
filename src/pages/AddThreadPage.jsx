@@ -3,7 +3,7 @@ import { Box, Heading } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { asyncAddTread } from '../redux/threads/action';
-import AddThreadInput from '../components/AddThreadInput';
+import { AddThreadInput } from '../components';
 
 function AddThreadPage() {
   const navigate = useNavigate();

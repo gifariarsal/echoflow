@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { IoEyeOffOutline, IoEyeOutline } from 'react-icons/io5';
 import {
   FormControl,
   FormLabel,
@@ -8,11 +9,11 @@ import {
   InputRightElement,
   InputGroup,
 } from '@chakra-ui/react';
-import { IoEyeOffOutline, IoEyeOutline } from 'react-icons/io5';
-import useInput from '../hooks/useInput';
-import CTAButton from './CTAButton';
+import useInput from '../../hooks/useInput';
+import CTAButton from '../common/CTAButton';
 
-function LoginInput({ onLogin }) {
+function RegisterInput({ onRegister }) {
+  const [name, onNameChange] = useInput('');
   const [email, onEmailChange] = useInput('');
   const [password, onPasswordChange] = useInput('');
 
@@ -23,19 +24,27 @@ function LoginInput({ onLogin }) {
   return (
     <form>
       <FormControl isRequired>
+        <FormLabel htmlFor="name">Name</FormLabel>
+        <Input
+          id="name"
+          type="text"
+          rounded="lg"
+          value={name}
+          onChange={onNameChange}
+        />
+      </FormControl>
+      <FormControl isRequired mt="4">
         <FormLabel htmlFor="email">Email</FormLabel>
         <Input
           id="email"
-          type="text"
+          type="email"
           rounded="lg"
           value={email}
           onChange={onEmailChange}
         />
       </FormControl>
       <FormControl isRequired mt="4">
-        <FormLabel htmlFor="password">
-          Password
-        </FormLabel>
+        <FormLabel htmlFor="password">Password</FormLabel>
         <InputGroup>
           <Input
             id="password"
@@ -46,7 +55,7 @@ function LoginInput({ onLogin }) {
             onChange={onPasswordChange}
           />
           <InputRightElement width="3.5rem">
-            <Button h="1.75rem" size="sm" title="Show/Hide Password" onClick={handleClick}>
+            <Button h="1.75rem" size="sm" onClick={handleClick}>
               {show ? (
                 <IoEyeOffOutline size="20px" />
               ) : (
@@ -56,13 +65,16 @@ function LoginInput({ onLogin }) {
           </InputRightElement>
         </InputGroup>
       </FormControl>
-      <CTAButton action="Login" onClick={() => onLogin({ email, password })} />
+      <CTAButton
+        action="Register"
+        onClick={() => onRegister({ name, email, password })}
+      />
     </form>
   );
 }
 
-LoginInput.propTypes = {
-  onLogin: PropTypes.func.isRequired,
+RegisterInput.propTypes = {
+  onRegister: PropTypes.func.isRequired,
 };
 
-export default LoginInput;
+export default RegisterInput;
