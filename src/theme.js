@@ -6,6 +6,7 @@ const theme = extendTheme({
       main: '#CC246C',
       hover: '#EA4B8F',
       active: '#9C0C4A',
+      bg: '#FFE9F2',
     },
     bg: {
       primary: '#F0F0F0',

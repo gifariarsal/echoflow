@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Box, Heading, IconButton, Text
 } from '@chakra-ui/react';
@@ -6,14 +6,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { IoAddOutline } from 'react-icons/io5';
 import { asyncPopulateUsersAndThreads } from '../redux/shared/action';
-import useInput from '../hooks/useInput';
 import ThreadCategoryList from '../components/ThreadCategoryList';
 import ThreadList from '../components/ThreadList';
 
 function HomePage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [category, onCategoryChange] = useInput('');
+  const [category, onCategoryChange] = useState('');
 
   const threads = useSelector((state) => state.threads);
   const users = useSelector((state) => state.users);
@@ -29,9 +28,9 @@ function HomePage() {
     authUser: authUser?.id,
   }));
 
-  const threadCategory = threadList.filter(
-    (thread) => thread.category === category
-  );
+  const threadCategory = category === ''
+    ? threadList
+    : threadList.filter((thread) => thread.category === category);
 
   const addThread = () => {
     navigate('/add-thread');
@@ -48,17 +47,15 @@ function HomePage() {
         rounded="xl"
       >
         <header>
-          <Text fontWeight="medium" mb={1}>
+          <Text fontWeight="semibold" mb={1}>
             Category
           </Text>
           <ThreadCategoryList onCategoryChange={onCategoryChange} />
         </header>
-        <Heading as="h2" size="lg" mb={8} mt={2}>
+        <Heading as="h2" size="lg" mb={8} mt={4}>
           Explore Threads
         </Heading>
-        <ThreadList
-          threads={category ? threadCategory : threadList}
-        />
+        <ThreadList threads={category ? threadCategory : threadList} />
       </Box>
       {authUser && (
         <IconButton

@@ -6,12 +6,14 @@ function ThreadCategoryItem({ category, selected, selectCategory }) {
   return (
     <Button
       type="button"
-      rounded="full"
-      bg={category === selected ? 'bg.primary' : 'bg.secondary'}
+      bg={category === selected ? 'brand.bg' : 'bg.secondary'}
       color="brand.main"
       fontWeight={400}
+      p={2}
+      mr={2}
       value={category}
       onClick={selectCategory}
+      _hover={{ bg: 'brand.bg' }}
     >
       {`#${category}`}
     </Button>
