@@ -16,10 +16,10 @@ function RegisterPage() {
     navigate('/login');
   };
   return (
-    <Box w="full" minH="100vh" bg="bg.primary" p={4}>
+    <Box w="full" minH="calc(100vh - 60px)" bg="bg.primary" p={4}>
       <Box
         w="full"
-        minH={{ md: '100vh' }}
+        minH={{ md: 'calc(100vh - 60px - 32px)' }}
         rounded="xl"
         bg="bg.secondary"
         display="flex"

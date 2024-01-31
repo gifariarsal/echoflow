@@ -15,13 +15,13 @@ function AddThreadPage() {
   };
 
   return (
-    <Box w="full" minH="100vh" bg="bg.primary" p={4}>
+    <Box w="full" minH="calc(100vh - 60px)" bg="bg.primary" p={4}>
       <Box
         maxW="800px"
         mx="auto"
         p={8}
         bg="bg.secondary"
-        minH="100vh"
+        minH="calc(100vh - 60px - 32px)"
         rounded="xl"
       >
         <Heading as="h2" size="lg" mb={4}>

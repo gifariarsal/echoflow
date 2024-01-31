@@ -43,7 +43,7 @@ function AddThreadInput({ addThread }) {
       </FormControl>
       <FormControl isRequired mt="4" mb="2">
         <FormLabel htmlFor="body">Content</FormLabel>
-        <Textarea id="body" rounded="lg" value={body} onChange={onBodyChange} />
+        <Textarea id="body" rounded="lg" minH="100px" value={body} onChange={onBodyChange} />
       </FormControl>
       <CTAButton action="Add Thread" onClick={addThreadHandler} />
     </form>
