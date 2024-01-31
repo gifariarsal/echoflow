@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {
   FormControl,
   FormLabel,
@@ -9,16 +8,24 @@ import {
   InputGroup,
 } from '@chakra-ui/react';
 import { IoEyeOffOutline, IoEyeOutline } from 'react-icons/io5';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import useInput from '../../hooks/useInput';
 import CTAButton from '../common/CTAButton';
+import { asyncSetAuthUser } from '../../redux/authUser/action';
+import useTogglePassword from '../../hooks/useTooglePassword';
 
-function LoginInput({ onLogin }) {
+function LoginInput() {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [email, onEmailChange] = useInput('');
   const [password, onPasswordChange] = useInput('');
+  const [show, handleTogglePassword] = useTogglePassword();
 
-  const [show, setShow] = React.useState(false);
-
-  const handleClick = () => setShow(!show);
+  const onLogin = async () => {
+    await dispatch(asyncSetAuthUser({ email, password }));
+    navigate('/');
+  };
 
   return (
     <form>
@@ -48,7 +55,7 @@ function LoginInput({ onLogin }) {
               h="1.75rem"
               size="sm"
               title="Show/Hide Password"
-              onClick={handleClick}
+              onClick={handleTogglePassword}
             >
               {show ? (
                 <IoEyeOffOutline size="20px" />
@@ -59,13 +66,9 @@ function LoginInput({ onLogin }) {
           </InputRightElement>
         </InputGroup>
       </FormControl>
-      <CTAButton action="Login" onClick={() => onLogin({ email, password })} />
+      <CTAButton action="Login" onClick={onLogin} />
     </form>
   );
 }
-
-LoginInput.propTypes = {
-  onLogin: PropTypes.func.isRequired,
-};
 
 export default LoginInput;

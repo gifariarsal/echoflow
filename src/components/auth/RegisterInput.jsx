@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { IoEyeOffOutline, IoEyeOutline } from 'react-icons/io5';
 import {
   FormControl,
@@ -9,17 +8,25 @@ import {
   InputRightElement,
   InputGroup,
 } from '@chakra-ui/react';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import useInput from '../../hooks/useInput';
 import CTAButton from '../common/CTAButton';
+import { asyncRegisterUser } from '../../redux/users/action';
+import useTogglePassword from '../../hooks/useTooglePassword';
 
-function RegisterInput({ onRegister }) {
+function RegisterInput() {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [name, onNameChange] = useInput('');
   const [email, onEmailChange] = useInput('');
   const [password, onPasswordChange] = useInput('');
+  const [show, handleTogglePassword] = useTogglePassword();
 
-  const [show, setShow] = React.useState(false);
-
-  const handleClick = () => setShow(!show);
+  const onRegister = () => {
+    dispatch(asyncRegisterUser({ name, email, password }));
+    navigate('/login');
+  };
 
   return (
     <form>
@@ -55,7 +62,7 @@ function RegisterInput({ onRegister }) {
             onChange={onPasswordChange}
           />
           <InputRightElement width="3.5rem">
-            <Button h="1.75rem" size="sm" onClick={handleClick}>
+            <Button h="1.75rem" size="sm" onClick={handleTogglePassword}>
               {show ? (
                 <IoEyeOffOutline size="20px" />
               ) : (
@@ -72,9 +79,5 @@ function RegisterInput({ onRegister }) {
     </form>
   );
 }
-
-RegisterInput.propTypes = {
-  onRegister: PropTypes.func.isRequired,
-};
 
 export default RegisterInput;
