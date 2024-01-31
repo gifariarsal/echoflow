@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { IoEyeOffOutline, IoEyeOutline } from 'react-icons/io5';
 import {
   FormControl,
@@ -8,25 +9,15 @@ import {
   InputRightElement,
   InputGroup,
 } from '@chakra-ui/react';
-import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
 import useInput from '../../hooks/useInput';
 import CTAButton from '../common/CTAButton';
-import { asyncRegisterUser } from '../../redux/users/action';
 import useTogglePassword from '../../hooks/useTooglePassword';
 
-function RegisterInput() {
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
+function RegisterInput({ onRegister }) {
   const [name, onNameChange] = useInput('');
   const [email, onEmailChange] = useInput('');
   const [password, onPasswordChange] = useInput('');
   const [show, handleTogglePassword] = useTogglePassword();
-
-  const onRegister = () => {
-    dispatch(asyncRegisterUser({ name, email, password }));
-    navigate('/login');
-  };
 
   return (
     <form>
@@ -79,5 +70,9 @@ function RegisterInput() {
     </form>
   );
 }
+
+RegisterInput.propTypes = {
+  onRegister: PropTypes.func.isRequired,
+};
 
 export default RegisterInput;

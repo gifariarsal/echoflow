@@ -24,8 +24,8 @@ function App() {
     dispatch(asyncPreloadProcess());
   }, [dispatch]);
 
-  const onLogOut = async () => {
-    await dispatch(asyncUnsetAuthUser());
+  const onLogOut = () => {
+    dispatch(asyncUnsetAuthUser());
     navigate('/');
   };
 

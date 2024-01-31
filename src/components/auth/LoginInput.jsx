@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {
   FormControl,
   FormLabel,
@@ -8,24 +9,14 @@ import {
   InputGroup,
 } from '@chakra-ui/react';
 import { IoEyeOffOutline, IoEyeOutline } from 'react-icons/io5';
-import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
 import useInput from '../../hooks/useInput';
 import CTAButton from '../common/CTAButton';
-import { asyncSetAuthUser } from '../../redux/authUser/action';
 import useTogglePassword from '../../hooks/useTooglePassword';
 
-function LoginInput() {
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
+function LoginInput({ onLogin }) {
   const [email, onEmailChange] = useInput('');
   const [password, onPasswordChange] = useInput('');
   const [show, handleTogglePassword] = useTogglePassword();
-
-  const onLogin = async () => {
-    await dispatch(asyncSetAuthUser({ email, password }));
-    navigate('/');
-  };
 
   return (
     <form>
@@ -66,9 +57,13 @@ function LoginInput() {
           </InputRightElement>
         </InputGroup>
       </FormControl>
-      <CTAButton action="Login" onClick={onLogin} />
+      <CTAButton action="Login" onClick={() => onLogin({ email, password })} />
     </form>
   );
 }
+
+LoginInput.propTypes = {
+  onLogin: PropTypes.func.isRequired,
+};
 
 export default LoginInput;
