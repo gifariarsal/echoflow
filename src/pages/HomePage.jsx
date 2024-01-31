@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {
-  Box, Heading, IconButton, Text
+  Heading, IconButton, Text
 } from '@chakra-ui/react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -8,6 +8,7 @@ import { IoAddOutline } from 'react-icons/io5';
 import { asyncPopulateUsersAndThreads } from '../redux/shared/action';
 import ThreadCategoryList from '../components/thread/ThreadCategoryList';
 import ThreadList from '../components/thread/ThreadList';
+import Layout from '../components/common/Layout';
 
 function HomePage() {
   const dispatch = useDispatch();
@@ -37,21 +38,8 @@ function HomePage() {
   };
 
   return (
-    <Box
-      pos="relative"
-      w="full"
-      minH="calc(100vh - 60px)"
-      bg="bg.primary"
-      p={4}
-    >
-      <Box
-        maxW="800px"
-        mx="auto"
-        p={8}
-        bg="bg.secondary"
-        minH="calc(100vh - 60px - 32px)"
-        rounded="xl"
-      >
+    <>
+      <Layout>
         <header>
           <Text fontWeight="semibold" mb={1}>
             Category
@@ -62,7 +50,7 @@ function HomePage() {
           Explore Threads
         </Heading>
         <ThreadList threads={category ? threadCategory : threadList} />
-      </Box>
+      </Layout>
       {authUser && (
         <IconButton
           pos="fixed"
@@ -80,7 +68,7 @@ function HomePage() {
           _active={{ bg: 'brand.active' }}
         />
       )}
-    </Box>
+    </>
   );
 }
 

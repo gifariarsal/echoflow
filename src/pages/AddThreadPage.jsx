@@ -1,9 +1,10 @@
 import React from 'react';
-import { Box, Heading } from '@chakra-ui/react';
+import { Heading } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { asyncAddTread } from '../redux/threads/action';
 import AddThreadInput from '../components/thread/AddThreadInput';
+import Layout from '../components/common/Layout';
 
 function AddThreadPage() {
   const navigate = useNavigate();
@@ -15,21 +16,12 @@ function AddThreadPage() {
   };
 
   return (
-    <Box w="full" minH="calc(100vh - 60px)" bg="bg.primary" p={4}>
-      <Box
-        maxW="800px"
-        mx="auto"
-        p={8}
-        bg="bg.secondary"
-        minH="calc(100vh - 60px - 32px)"
-        rounded="xl"
-      >
-        <Heading as="h2" size="lg" mb={4}>
-          Add New Thread
-        </Heading>
-        <AddThreadInput addThread={onAddThread} />
-      </Box>
-    </Box>
+    <Layout>
+      <Heading as="h2" size="lg" mb={4}>
+        Add New Thread
+      </Heading>
+      <AddThreadInput addThread={onAddThread} />
+    </Layout>
   );
 }
 
