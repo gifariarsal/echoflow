@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {
-  Heading, IconButton, Text
-} from '@chakra-ui/react';
+import { Heading, IconButton, Text } from '@chakra-ui/react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { IoAddOutline } from 'react-icons/io5';

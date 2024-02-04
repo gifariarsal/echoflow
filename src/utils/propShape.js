@@ -33,6 +33,4 @@ const detailThreadShape = {
   comments: PropTypes.arrayOf(PropTypes.shape(commentShape)),
 };
 
-export {
-  userShape, leaderboardItemShape, commentShape, detailThreadShape
-};
+export { userShape, leaderboardItemShape, commentShape, detailThreadShape };

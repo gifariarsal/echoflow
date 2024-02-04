@@ -4,9 +4,7 @@ import { Heading, Text } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 import { postedAt } from '../../utils';
 
-function ThreadItemHeader({
-  id, category, title, user, createdAt
-}) {
+function ThreadItemHeader({ id, category, title, user, createdAt }) {
   return (
     <header>
       <Text color="brand.main" mb={2}>{`#${category}`}</Text>

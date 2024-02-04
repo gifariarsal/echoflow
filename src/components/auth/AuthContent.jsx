@@ -1,12 +1,8 @@
-import {
-  Box, Button, Image, Text, VStack
-} from '@chakra-ui/react';
+import { Box, Button, Image, Text, VStack } from '@chakra-ui/react';
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function AuthContent({
-  img, name, toLink, topText, href, input
-}) {
+function AuthContent({ img, name, toLink, topText, href, input }) {
   return (
     <>
       <Box

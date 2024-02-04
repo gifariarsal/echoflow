@@ -76,11 +76,7 @@ function Navbar({ authUser, onLogOut }) {
               src={authUser?.avatar}
               size={{ base: 'xs', md: 'sm' }}
             />
-            <Text>
-              Hi,
-              {' '}
-              {authUser?.name}
-            </Text>
+            <Text>Hi, {authUser?.name}</Text>
             <Button
               gap={2}
               p={isMobile ? 0 : 2}

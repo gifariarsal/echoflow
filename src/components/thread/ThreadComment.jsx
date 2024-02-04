@@ -1,6 +1,4 @@
-import {
-  Box, Heading, Text, Textarea
-} from '@chakra-ui/react';
+import { Box, Heading, Text, Textarea } from '@chakra-ui/react';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
@@ -42,22 +40,18 @@ function ThreadComment({ threadDetail, authUser, onAddComment }) {
             onChange={handleCommentChange}
           />
           <Text textAlign="right" color="gray">
-            {content.length}
-            /
-            {MAX_CONTENT_LENGTH}
+            {content.length}/{MAX_CONTENT_LENGTH}
           </Text>
           <CTAButton action="Add Comment" onClick={handleAddComment} />
         </Box>
       ) : (
         <Box display="flex" alignItems="center" gap={1}>
-          Please
-          {' '}
+          Please{' '}
           <Link to="/login">
             <Text color="brand.main" _hover={{ textDecoration: 'underline' }}>
               login
             </Text>
-          </Link>
-          {' '}
+          </Link>{' '}
           to leave a comment
         </Box>
       )}

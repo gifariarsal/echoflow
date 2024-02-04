@@ -7,9 +7,7 @@ import {
   BiSolidDownvote,
 } from 'react-icons/bi';
 import parse from 'html-react-parser';
-import {
-  Avatar, Box, Heading, Text
-} from '@chakra-ui/react';
+import { Avatar, Box, Heading, Text } from '@chakra-ui/react';
 import { useDispatch } from 'react-redux';
 import { postedAt } from '../../utils';
 import ThreadItemFooterButton from './ThreadItemFooterButton';

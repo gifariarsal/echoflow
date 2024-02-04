@@ -6,7 +6,8 @@
     },
     "extends": [
         "plugin:react/recommended",
-        "airbnb"
+        "airbnb",
+        "prettier"
     ],
     "overrides": [
     ],
@@ -27,7 +28,6 @@
         "react-hooks/exhaustive-deps": "warn",
         "react/jsx-props-no-spreading": "off",
         "import/no-extraneous-dependencies": "off",
-        // "react/no-array-index-key": "off",
         "comma-dangle": 0
     }
 }
