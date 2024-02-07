@@ -10,13 +10,16 @@
  *  - should dispatch action and call alert correctly when data fetching failed
  */
 
-import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { hideLoading, showLoading } from "react-redux-loading-bar";
-import { asyncPopulateLeaderboards, asyncPopulateUsersAndThreads } from "./action";
-import { receiveThreadsActionCreator } from "../threads/action";
-import { receiveUsersActionCreator } from "../users/action";
-import api from "../../utils/api";
-import { receiveLeaderboardsActionCreator } from "../leaderboards/action";
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { hideLoading, showLoading } from 'react-redux-loading-bar';
+import {
+  asyncPopulateLeaderboards,
+  asyncPopulateUsersAndThreads,
+} from './action';
+import { receiveThreadsActionCreator } from '../threads/action';
+import { receiveUsersActionCreator } from '../users/action';
+import api from '../../utils/api';
+import { receiveLeaderboardsActionCreator } from '../leaderboards/action';
 
 const fakeThreadsResponse = [
   {
@@ -82,74 +85,70 @@ const fakeLeaderboardsResponse = [
 const fakeErrorResponse = new Error('Ups, something went wrong');
 
 describe('asyncPopulateUsersAndThreads thunk', () => {
-    beforeEach(() => {
-      api._getAllUsers = api.getAllUsers;
-      api._getAllThreads = api.getAllThreads;
-    });
+  beforeEach(() => {
+    api._getAllUsers = api.getAllUsers;
+    api._getAllThreads = api.getAllThreads;
+  });
 
-    afterEach(() => {
-      api.getAllUsers = api._getAllUsers;
-      api.getAllThreads = api._getAllThreads;
+  afterEach(() => {
+    api.getAllUsers = api._getAllUsers;
+    api.getAllThreads = api._getAllThreads;
 
-      // delete backup
-      delete api._getAllUsers;
-      delete api._getAllThreads;
-    });
+    delete api._getAllUsers;
+    delete api._getAllThreads;
+  });
 
-    it('should dispatch action correctly when data fetching success', async () => {
-      // arrange
-      // stub implementation
-      api.getAllUsers = () => Promise.resolve(fakeUsersResponse);
-      api.getAllThreads = () => Promise.resolve(fakeThreadsResponse);
+  it('should dispatch action correctly when data fetching success', async () => {
+    // arrange
+    // stub implementation
+    api.getAllUsers = () => Promise.resolve(fakeUsersResponse);
+    api.getAllThreads = () => Promise.resolve(fakeThreadsResponse);
 
-      // mock dispatch
-      const dispatch = vi.fn();
+    // mock dispatch
+    const dispatch = vi.fn();
 
-      // action
-      await asyncPopulateUsersAndThreads()(dispatch);
+    // action
+    await asyncPopulateUsersAndThreads()(dispatch);
 
-      // assert
-      expect(dispatch).toHaveBeenCalledWith(showLoading());
-      expect(dispatch).toHaveBeenCalledWith(
-        receiveThreadsActionCreator(fakeThreadsResponse)
-      );
-      expect(dispatch).toHaveBeenCalledWith(
-        receiveUsersActionCreator(fakeUsersResponse)
-      );
-      expect(dispatch).toHaveBeenCalledWith(hideLoading());
-    });
+    // assert
+    expect(dispatch).toHaveBeenCalledWith(showLoading());
+    expect(dispatch).toHaveBeenCalledWith(
+      receiveThreadsActionCreator(fakeThreadsResponse)
+    );
+    expect(dispatch).toHaveBeenCalledWith(
+      receiveUsersActionCreator(fakeUsersResponse)
+    );
+    expect(dispatch).toHaveBeenCalledWith(hideLoading());
+  });
 
-    it('should dispatch action and call alert correctly when data fetching failed', async () => {
-      // arrange
-      // stub implementation
-      api.getAllUsers = () => Promise.reject(fakeErrorResponse);
-      api.getAllThreads = () => Promise.reject(fakeErrorResponse);
-      // mock dispatch
-      const dispatch = vi.fn();
-      // mock alert
-      window.alert = vi.fn();
+  it('should dispatch action and call alert correctly when data fetching failed', async () => {
+    // arrange
+    // stub implementation
+    api.getAllUsers = () => Promise.reject(fakeErrorResponse);
+    api.getAllThreads = () => Promise.reject(fakeErrorResponse);
+    // mock dispatch
+    const dispatch = vi.fn();
+    // mock alert
+    window.alert = vi.fn();
 
-      // action
-      await asyncPopulateUsersAndThreads()(dispatch);
+    // action
+    await asyncPopulateUsersAndThreads()(dispatch);
 
-      // assert
-      expect(dispatch).toHaveBeenCalledWith(showLoading());
-      expect(dispatch).toHaveBeenCalledWith(hideLoading());
-      expect(window.alert).toHaveBeenCalledWith(fakeErrorResponse.message);
-    });
+    // assert
+    expect(dispatch).toHaveBeenCalledWith(showLoading());
+    expect(dispatch).toHaveBeenCalledWith(hideLoading());
+    expect(window.alert).toHaveBeenCalledWith(fakeErrorResponse.message);
+  });
 });
 
 describe('asyncPopulateLeaderboards thunk', () => {
   beforeEach(() => {
-    // backup original implementation
     api._getAllLeaderboards = api.getAllleaderBoards;
   });
 
   afterEach(() => {
-    // restore original implementation
     api.getAllleaderBoards = api._getAllLeaderboards;
 
-    // delete backup
     delete api._getAllLeaderboards;
   });
 
