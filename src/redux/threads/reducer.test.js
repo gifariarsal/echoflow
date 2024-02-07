@@ -13,8 +13,8 @@
  */
 
 import { describe, expect, it } from 'vitest';
-import threadReducer from './reducer';
 import { ActionType } from './action';
+import threadReducer from './reducer';
 
 describe('threadReducers function', () => {
   it('should return the initial state when given by unknown action', () => {
