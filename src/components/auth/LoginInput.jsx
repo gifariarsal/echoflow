@@ -24,7 +24,8 @@ function LoginInput({ onLogin }) {
         <FormLabel htmlFor="email">Email</FormLabel>
         <Input
           id="email"
-          type="text"
+          type="email"
+          placeholder="Enter your email"
           rounded="lg"
           value={email}
           onChange={onEmailChange}
@@ -36,6 +37,7 @@ function LoginInput({ onLogin }) {
           <Input
             id="password"
             name="password"
+            placeholder="Enter your password"
             type={show ? 'text' : 'password'}
             rounded="lg"
             value={password}
