@@ -26,6 +26,7 @@ function RegisterInput({ onRegister }) {
         <Input
           id="name"
           type="text"
+          placeholder="Enter your name"
           rounded="lg"
           value={name}
           onChange={onNameChange}
@@ -36,6 +37,7 @@ function RegisterInput({ onRegister }) {
         <Input
           id="email"
           type="email"
+          placeholder="Enter your email"
           rounded="lg"
           value={email}
           onChange={onEmailChange}
@@ -47,6 +49,7 @@ function RegisterInput({ onRegister }) {
           <Input
             id="password"
             name="password"
+            placeholder="Enter your password"
             type={show ? 'text' : 'password'}
             rounded="lg"
             value={password}
