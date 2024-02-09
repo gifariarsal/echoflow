@@ -27,9 +27,10 @@ function HomePage() {
     authUser: authUser?.id,
   }));
 
-  const threadCategory = category === ''
-    ? threadList
-    : threadList.filter((thread) => thread.category === category);
+  const threadCategory =
+    category === ''
+      ? threadList
+      : threadList.filter((thread) => thread.category === category);
 
   const addThread = () => {
     navigate('/add-thread');
@@ -44,7 +45,15 @@ function HomePage() {
           </Text>
           <ThreadCategoryList onCategoryChange={onCategoryChange} />
         </header>
-        <Heading as="h2" size="lg" mb={8} mt={4}>
+        <Heading
+          as="h2"
+          size="lg"
+          mb={8}
+          mt={2}
+          pt={4}
+          borderTop="1px solid"
+          borderColor="gray.300"
+        >
           Explore Threads
         </Heading>
         <ThreadList threads={category ? threadCategory : threadList} />
