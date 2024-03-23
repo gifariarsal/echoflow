@@ -10,6 +10,7 @@ import {
   LoginPage,
   RegisterPage,
   ThreadDetailPage,
+  NotFoundPage,
 } from './pages';
 import Navbar from './components/common/Navbar';
 import Loading from './components/common/Loading';
@@ -45,6 +46,7 @@ function App() {
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/leaderboards" element={<LeaderboardsPage />} />
             <Route path="/threads/:id" element={<ThreadDetailPage />} />
+            <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </main>
       </>
@@ -62,6 +64,7 @@ function App() {
           <Route path="/leaderboards" element={<LeaderboardsPage />} />
           <Route path="/threads/:id" element={<ThreadDetailPage />} />
           <Route path="/add-thread" element={<AddThreadPage />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </main>
     </>
