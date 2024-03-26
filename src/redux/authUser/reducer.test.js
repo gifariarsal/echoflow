@@ -29,7 +29,12 @@ describe('AuthUser function', () => {
     const action = {
       type: ActionType.SET_AUTH_USER,
       payload: {
-        authUser: null,
+        authUser: {
+          id: 'john_doe',
+          name: 'John Doe',
+          email: 'john@example.com',
+          avatar: 'https://generated-image-url.jpg',
+        },
       },
     };
 
