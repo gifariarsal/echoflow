@@ -59,8 +59,6 @@ function App() {
       <main>
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/register" element={<RegisterPage />} />
           <Route path="/leaderboards" element={<LeaderboardsPage />} />
           <Route path="/threads/:id" element={<ThreadDetailPage />} />
           <Route path="/add-thread" element={<AddThreadPage />} />
